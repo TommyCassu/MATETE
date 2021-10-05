@@ -64,6 +64,16 @@ class Annonce
      */
     private $producteur;
 
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $status;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateMiseEnLigne;
+
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
@@ -193,6 +203,30 @@ class Annonce
     public function setProducteur(?Producteur $producteur): self
     {
         $this->producteur = $producteur;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getDateMiseEnLigne(): ?\DateTimeInterface
+    {
+        return $this->dateMiseEnLigne;
+    }
+
+    public function setDateMiseEnLigne(?\DateTimeInterface $dateMiseEnLigne): self
+    {
+        $this->dateMiseEnLigne = $dateMiseEnLigne;
 
         return $this;
     }

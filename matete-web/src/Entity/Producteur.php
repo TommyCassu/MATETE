@@ -59,6 +59,11 @@ class Producteur
      */
     private $Annonce;
 
+    public function __toString(): string
+    {
+        return $this->getNom();
+    }
+
     public function __construct()
     {
         $this->lieux = new ArrayCollection();

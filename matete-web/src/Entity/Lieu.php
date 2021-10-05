@@ -108,6 +108,11 @@ class Lieu
         return $this;
     }
 
+    public function __toString(): string
+    {
+        return $this->getNom();
+    }
+
     /**
      * @return Collection|Annonce[]
      */

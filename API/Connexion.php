@@ -1,5 +1,8 @@
 <?php
-
+require('Annonce.php');
+require('Categorie.php');
+require('Lieu.php');
+require('Producteur.php');
 class Connexion{
     private $bdd;
 
@@ -16,25 +19,22 @@ class Connexion{
     function RecupererAnnonces(){
         
         $dateActuelle = new DateTime();
-        $intervalplus30jours = new DateInterval("PT30D");
+        $intervalplus30jours = new DateInterval("P30D");
 
         $dateActuelleFormate = $dateActuelle->format('Y-m-d H:i:s');
 
         $datePlus30jours = $dateActuelle->sub($intervalplus30jours)->format('Y-m-d H:i:s');
 
-        $requete = $this->bdd->prepare('SELECT * FROM annonce WHERE dateAcutelleFormate < date_mise_en_ligne < datePlus30jours');
+        $requete = $this->bdd->prepare('SELECT * FROM annonce a INNER JOIN lieu l ON l.id = a.lieu_id');
         $requete->execute();
         $annoncesPOO = array();
-        while ($row = $stmt->fetch()) { 
-            array_push($annoncesPOO,$annonce = new annonce($row['id'],$row['creneauxDébut'],$row['creneauxFin'],$row['libelleProduit'],$row['creneauxDébut'],$row['prixUnitaire'],$row['qte']));
-        }
-        
-    }
-    function recherche($lestags){
-        for(i=0,$lestags<i,i++){
 
+        while ($row = $requete->fetch()) { 
+            $l = new Lieu($row['id'],$row['coo_x'],$row['coo_y'],$row['desc_lieu'],$row['nom']);
+            array_push($annoncesPOO, new Annonce($row['id'],$row['creneaux_debut'],$row['creneaux_fin'],$row['libelle_produit'],$row['prix_unitaire'],$row['quantite'],$row['status'],$row['date_mise_en_ligne'],$l));
         }
+        return $annoncesPOO;
+    }
     }
 
-}
 ?>

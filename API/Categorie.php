@@ -1,6 +1,6 @@
 <?php
 
-class Catégorie {
+class Categorie implements JsonSerializable {
     private $id;
     private $libelle;
 
@@ -8,6 +8,13 @@ class Catégorie {
     {
         $this->id = $_id;
         $this->libelle = $_libelle;
+    }
+
+    public function jsonSerialize (){
+        return [
+            "id" => $this->id,
+            "libelle" => $this->libelle,
+        ];
     }
 
     

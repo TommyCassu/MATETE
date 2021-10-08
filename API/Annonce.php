@@ -10,8 +10,9 @@ class Annonce implements JsonSerializable {
     private $status;
     private $date_mise_en_ligne;
     private $lieu;
+    private $categorie;
 
-    function __construct( $_id, $_creneaux_debut,$_creneaux_fin,$_libelle_produit,$_prix_unitaire,$_quantite,$_status,$_date_mise_en_ligne,$_lieu)
+    function __construct( $_id, $_creneaux_debut,$_creneaux_fin,$_libelle_produit,$_prix_unitaire,$_quantite,$_status,$_date_mise_en_ligne,$_lieu,$_categorie)
     {
         $this->id = $_id;
         $this->creneaux_debut = $_creneaux_debut;
@@ -22,6 +23,7 @@ class Annonce implements JsonSerializable {
         $this->status = $_status;
         $this->date_mise_en_ligne = $_date_mise_en_ligne;
         $this->lieu = $_lieu;
+        $this->categorie = $_categorie;
     }
 
     public function jsonSerialize (){
@@ -35,6 +37,7 @@ class Annonce implements JsonSerializable {
             "status" => $this->status,
             "date_mise_en_ligne" => $this->date_mise_en_ligne,
             "lieu" => $this->lieu,
+            "categorie" => $this->categorie,
         ];
     }
 

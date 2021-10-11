@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
-    #[Route('/', name: 'main')]
+    #[Route('/carte', name: 'main')]
     public function index(AnnonceRepository $annonceRepository, LieuRepository $lieuRepository): Response
     {
         $lieux = $lieuRepository->findAll();

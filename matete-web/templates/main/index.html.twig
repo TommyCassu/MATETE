@@ -3,11 +3,30 @@
 {% block title %}Hello MainController!{% endblock %}
 
 {% block body %}
-    {% for lieu in lieux %}
-        {% for annonce in lieu.getAnnonce %}
-        {% endfor %}
-    {% endfor %}
-    <div id="map"></div>
+
+  <script>
+    function initMap() {
+    const lycée = { lat: 42.69276266087135, lng: 2.909845647650987 };
+
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,
+        center: lycée,
+      });
+
+      {% for liste in listeAnnonces %}
+
+        var marker = new google.maps.Marker({
+          position: { lat: {{ liste.cooX }} , lng: {{liste.cooY}} },
+          map: map,
+        });
+      {% endfor %}
+    }
+  </script>
+
+    <div class="bg-gray-400 w">
+      <div id="map" class="w-screen h-screen"></div>
+    </div>
+    
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5t3C0OHeTuknC62DdKqOeqNPhMAhdITU&callback=initMap&libraries=&v=weekly"
       async>

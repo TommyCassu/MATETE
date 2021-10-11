@@ -19,10 +19,10 @@ class AnnonceRepository extends ServiceEntityRepository
         parent::__construct($registry, Annonce::class);
     }
 
-    // /**
-    //  * @return Annonce[] Returns an array of Annonce objects
-    //  */
-    /*
+     /**
+      * @return Annonce[] Returns an array of Annonce objects
+      */
+    
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('a')
@@ -34,8 +34,23 @@ class AnnonceRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
+    
 
+     /**
+      * @return Annonce[] Returns an array of Annonce objects
+      */
+    
+      public function recupAnnonces()
+      {
+;
+        return $this->createQueryBuilder('annonce')
+            ->join("lieu","lieu_id")
+            ->getQuery()
+            ->getResult()
+        ;
+         
+      }
+      
     /*
     public function findOneBySomeField($value): ?Annonce
     {

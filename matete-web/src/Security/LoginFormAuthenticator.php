@@ -13,12 +13,13 @@ class LoginFormAuthenticator implements AuthenticatorInterface
 {
     public function supports(Request $request): ?bool
     {
-        $request->attributes->get('_route');
+        return $request->attributes->get('_route') === 'main_page'
+            && $request->isMethod('POST');
     }
 
     public function authenticate(Request $request): PassportInterface
     {
-
+        dd('authenticate');
     }
 
     public function createAuthenticatedToken(PassportInterface $passport, string $firewallName): TokenInterface

@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ProducteurRepository::class)
+ * @ORM\Table(name="users")
  */
 class Producteur
 {
@@ -36,7 +37,7 @@ class Producteur
     private $tel;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, unique=true)
      */
     private $mail;
 

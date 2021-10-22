@@ -67,7 +67,13 @@ $ sudo php -r "unlink('composer-setup.php');"
 # Si composer n'est pas à jour
 $ sudo composer self-update
 ```
-
+# Documentation Technique :
+### Documentation API
+- Découvrez la documentation de l'API (Swagger) à ce [Lien](gaga)
+### Documentation Android (JAVA)
+- Découvrez la documentation de l'Android (Javadoc) à ce [Lien](gaga)
+### Documentation Site web (Symfony)
+- Découvrez la documentation du Symfony à ce [Lien](gaga)
 
 ### Version 
 - Composer : 2.1.9

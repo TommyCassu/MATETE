@@ -21,10 +21,11 @@ Pour pouvoir afficher une carte et ainsi permettre la localisation des annonces 
 
 ## Installation
 ### 1. Clone le projet
-_Linux :_
+
 ```shell
 $ git clone https://gitlab.com/RomainChardon/matete.git
 ```` 
+
 ### 2. Installer PHP 8.0.11
 <a name ="php"></a>
 _Linux :_

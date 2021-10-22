@@ -22,8 +22,8 @@ _Linux :_
 ```shell
 $ git clone https://gitlab.com/RomainChardon/matete.git
 ```` 
-
 ### 2. Installer PHP 8.0.11
+<a name ="php"></a>
 _Linux :_
 ```shell
 $ sudo apt update
@@ -31,6 +31,9 @@ $ sudo apt install php8.0 libapache2-mod-php8.0
 #Restart Apache2
 $ sudo systemctl restart apache2
 ```
+_Windows :_ 
+
+>Disponible sur le site officiel de [PHP](https://www.php.net/downloads)
 
 ### 3. Installer MYSQL
 _Linux :_
@@ -44,9 +47,15 @@ _Linux :_
 ```shell
 $ sudo wget https://get.symfony.com/cli/installer -O - | bash
 ```
+_Windows & Mac :_
 
+>Disponible sur le site officiel de [Symfony](https://symfony.com/download)
+
+>PS : Plus d'information sur l'installation sous linux en cas de problème.
 ### 5. Installer Composer 2.1.9
-_Linux :_
+_Linux & Windows :_
+
+>Necessite d'[installer PHP](#php)
 ```shell
 $ sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 $ sudo php -r "if (hash_file('sha384', 'composer-setup.php') === '906a84df04cea2aa72f40b5f787e49f22d4c2f19492ac310e8cba5b96ac8b64115ac402c8cd292b8a03482574915d1a8') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
@@ -55,6 +64,7 @@ $ sudo php -r "unlink('composer-setup.php');"
 # Si composer n'est pas à jour
 $ sudo composer self-update
 ```
+
 
 ### Version 
 - Composer : 2.1.9

@@ -3,25 +3,25 @@
 {% block title %}Hello MainController!{% endblock %}
 
 {% block body %}
- <h1> Se connecter / s'inscrire </h1>
+ <h1> Se connecter </h1>
 
- <form method="POST">
+ <form method="POST" action="{{ path('login_security') }}">
     <div>
         <div>
-            <label for="Email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Entrez un Email" required >
+            <label for="Mail">Email</label>
+            <input type="mail" id="mail" name="mail" placeholder="Entrez un Email" required >
         </div>
         <div>
-            <label for="pass">Email</label>
+            <label for="pass">Mot de passe</label>
             <input type="password" id="pass" name="pass" required>
         </div>
         <div>
             <a href="#"> Mot de passe oublié </a>
         </div>
         <div>
-            <input type="button" id="inscription" name="inscription" value="Inscription">
-
-            <input type="button" id="connexion" name="connexion" value="Connexion">
+            <button><a href="{{ path('register_security') }}"> Inscription </a></button>
+            <input type="submit" id="connexion" name="connexion" value="Connexion">
+            <input type="hidden" name="crsf_token" value="{{ csrf_token('login_form') }}">
         </div>
     </div>
  </form>

@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass=ProducteurRepository::class)
  * @ORM\Table(name="users")
  */
-class Producteur
+class Producteur implements UserInterface
 {
     /**
      * @ORM\Id
@@ -125,7 +125,7 @@ class Producteur
         return $this;
     }
 
-    public function getMdp(): ?string
+    public function getPassword()
     {
         return $this->mdp;
     }
@@ -215,4 +215,28 @@ class Producteur
 
         return $this;
     }
+
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
+    }
+
+    
+    public function getSalt()
+    {
+        return null;
+    }
+
+    
+    public function eraseCredentials()
+    {
+        
+    }
+
+    
+    public function getUsername()
+    {
+        return $this->mail;
+    }
 }
+

@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\CsrfTokenBadge;
@@ -37,19 +38,15 @@ class LoginFormAuthenticator extends AbstractAuthenticator
     public function authenticate(Request $request): PassportInterface
     {
         $producteur = $this->producteurRepository->findOneByMail($request->request->get('mail'));
+
         if (!$producteur) {
-            throw new UsernameNotFoundException();
+            throw new CustomUserMessageAuthenticationException('Username non valide');
         }
 
-        return new Passport($producteur, new PasswordCredentials($request->request->get('password')), [
-            new CsrfTokenBadge('login_form', $request->request->get('csrf_token')),
-            new PasswordUpgradeBadge($request->request->get('password'), $this->producteurRepository)
+        return new Passport( $producteur, 
+        new PasswordCredentials($request->request->get('pass')), [
+            new CsrfTokenBadge('login_form', $request->request->get('csrf_token'))
         ]);
-    }
-
-    public function createAuthenticatedToken(PassportInterface $passport, string $firewallName): TokenInterface
-    {
-
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response

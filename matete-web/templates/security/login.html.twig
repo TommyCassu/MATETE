@@ -21,7 +21,7 @@
         <div>
             <button><a href="{{ path('register_security') }}"> Inscription </a></button>
             <input type="submit" id="connexion" name="connexion" value="Connexion">
-            <input type="hidden" name="crsf_token" value="{{ csrf_token('login_form') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token('login_form') }}">
         </div>
     </div>
  </form>

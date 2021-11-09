@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 #[Route('/producteur')]
 class ProducteurController extends AbstractController
@@ -25,24 +26,24 @@ class ProducteurController extends AbstractController
     }
 
     #[Route('/new', name: 'producteur_new', methods: ['GET','POST'])]
-    public function new(Request $request, LieuRepository $lieuRepository, AnnonceRepository $annonceRepository): Response
+    public function new(Request $request, LieuRepository $lieuRepository, AnnonceRepository $annonceRepository, UserPasswordEncoderInterface $userPass): Response
     {
+        $entityManager = $this->getDoctrine()->getManager();
+
         $producteur = new Producteur();
-        $form = $this->createForm(ProducteurType::class, $producteur);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($producteur);
-            $entityManager->flush();
+        $passHash = ($userPass->encodePassword($producteur, $request->request->get('pass')));
 
-            return $this->redirectToRoute('producteur_index', [], Response::HTTP_SEE_OTHER);
-        }
+        $producteur->setNom($request->request->get('nom'));
+        $producteur->setPrenom($request->request->get('prenom'));
+        $producteur->setTel($request->request->get('tel'));
+        $producteur->setMail($request->request->get('mail'));
+        $producteur->setMdp($passHash);
 
-        return $this->renderForm('producteur/new.html.twig', [
-            'producteur' => $producteur,
-            'form' => $form,
-        ]);
+        $entityManager->persist($producteur);
+        $entityManager->flush();
+        
+        return $this->redirectToRoute("main_page");
     }
 
     #[Route('/{id}', name: 'producteur_show', methods: ['GET'])]

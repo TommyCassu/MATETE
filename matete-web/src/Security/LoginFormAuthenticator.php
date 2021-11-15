@@ -6,7 +6,6 @@ use App\Repository\ProducteurRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
@@ -21,12 +20,10 @@ use Symfony\Component\Security\Http\Authenticator\Passport\PassportInterface;
 class LoginFormAuthenticator extends AbstractAuthenticator
 {
     private $producteurRepository;
-    private $urlGenerator;
 
-    public function __construct(ProducteurRepository $producteurRepository, UrlGeneratorInterface $urlGenerator)
+    public function __construct(ProducteurRepository $producteurRepository)
     {
         $this->producteurRepository = $producteurRepository;
-        $this->urlGenerator = $urlGenerator;
     }
 
     public function supports(Request $request): ?bool
@@ -45,17 +42,17 @@ class LoginFormAuthenticator extends AbstractAuthenticator
 
         return new Passport( $producteur, 
         new PasswordCredentials($request->request->get('pass')), [
-            new CsrfTokenBadge('login_form', $request->request->get('csrf_token'))
+            new CsrfTokenBadge('log_form', $request->request->get('csrf_token'))
         ]);
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        return new RedirectResponse($this->urlGenerator->generate('main_page'));
+        return new RedirectResponse('/');
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
-        return new RedirectResponse($this->urlGenerator->generate('login_security'));
+        return new RedirectResponse('/login');
     }
 }

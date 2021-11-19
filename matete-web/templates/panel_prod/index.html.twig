@@ -39,32 +39,56 @@
     }
   </script>
     
-    {# Bouton panier #}
-    <a href="{{ path('login_security') }}">
-      <button class="z-50 bg-yellow-200 w-20 h-20 absolute top-0 right-0 absolute mt-16 mr-32 rounded-full border-yellow-900 border-4 border-opacity-25"><i class="fas fa-shopping-basket fa-3x"></i><a href="{{ path('login_security') }}"></a></button>
-    </a>
+    <div>
+      {# Bouton panier #}
+      <a href="{{ path('login_security') }}">
+        <button class="z-50 bg-yellow-200 w-20 h-20 absolute top-0 right-0 absolute mt-16 mr-32 rounded-full border-yellow-900 border-4 border-opacity-25"><i class="fas fa-shopping-basket fa-3x"></i><a href="{{ path('login_security') }}"></a></button>
+      </a>
+    </div>
+    
+    <div>
+      {# Bouton pour filtre #}
+      <a href="{{ path('login_security') }}">
+        <button class="z-50 bg-yellow-200 w-20 h-20 top-0 right-0 absolute mt-16 mr-8 rounded-full border-yellow-900 border-4 border-opacity-25" onclick="{{ path('login_security') }}"><i class="fas fa-filter fa-2x mt-2 mr-0"></i></button>
+      </a>
+    </div>
+    
+    <div>
+      {# Bouton pour déconnecter #}
+      <a href="{{ path('login_security') }}">
+        <button class="z-50 bg-yellow-200 w-20 h-20 right-0 absolute bottom-4 mr-16 rounded-full border-yellow-900 border-4 border-opacity-25" onclick="{{ path('login_security') }}"><i class="fas fa-sign-out fa-3x mr-0"></i></button>
+      </a>
+    </div>
+    
 
-    {# Bouton pour filtre #}
-    <a href="{{ path('login_security') }}">
-      <button class="z-50 bg-yellow-200 w-20 h-20 top-0 right-0 absolute mt-16 mr-8 rounded-full border-yellow-900 border-4 border-opacity-25" onclick="{{ path('login_security') }}"><i class="fas fa-filter fa-2x mt-2 mr-0"></i></button>
-    </a>
-
-    {# Bouton pour déconnecter #}
-    <a href="{{ path('login_security') }}">
-      <button class="z-50 bg-yellow-200 w-20 h-20 right-0 absolute bottom-4 mr-16 rounded-full border-yellow-900 border-4 border-opacity-25" onclick="{{ path('login_security') }}"><i class="fas fa-sign-out fa-3x mr-0"></i></button>
-    </a>
     {# "Pop-up" de gauche #}
     <div class="z-50 bg-yellow-200 rounded-r-lg w-4/12 h-full left-0 absolute ">
+        
+        <div>
+          {# Bouton Gestion de compte #}
+          <a href="{{ path('producteur_show',{'id':app.user.id}) }}">
+            <button class="z-50 bg-yellow-900 w-20 h-20 left-10 absolute top-60 mr-16 border-yellow-900 border-4 border-opacity-25" onclick="{{ path('producteur_show',{'id':app.user.id}) }}"><i class="">test</i></button>
+          </a>
+        </div>
+        
         {# Image de profil #}
-        <div class="left-10  mt-15 mr-20 relative flex flex-row ">
-            <img class="rounded-full relative w-40 h-40 mt-4 ml-4 " src="https://place-hold.it/150x150" alt="">
+        {% set foo = random(6) %}
+        <div class="left-5  mt-15 mr-20 relative flex flex-row ">
+            <img class="z-50 rounded-full relative w-48 h-40 mt-4 " src="{{ asset('image/' ~ foo ~ '.png') }}" alt="">
             {# Information de l'utilisateur #}
-             <div class="text-2xl  ml-20 relative">
-              <p class="mt-4" id="info">Nom : </p>
-              <p class="mt-4" id="info">Prenom :</p>
-              <p class="mt-4" id="info">Email : </p>
-              <p class="mt-4" id="info">Tel : </p>
+             <div class="text-2xl  ml-8 relative">
+              <p class="mt-4" id="info">Nom : {{app.user.nom}}</p>
+              <p class="mt-4" id="info">Prenom : {{app.user.prenom}}</p>
+              <p class="mt-4" id="info">Email : {{app.user.mail}}</p>
+              <p class="mt-4" id="info">Tel : {{app.user.tel}}</p>
           </div>
+        </div>
+
+        <div>
+          {# Bouton pour ajouter #}
+          <a href="{{ path('annonce_new') }}">
+            <button class="z-50 bg-yellow-900 w-20 h-20 right-10 absolute bottom-4 mr-16 rounded-full border-yellow-900 border-4 border-opacity-25" onclick="{{ path('annonce_new') }}"><i class="">test</i></button>
+          </a>
         </div>
         
         

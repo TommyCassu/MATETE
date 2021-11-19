@@ -3,10 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Annonce;
+use App\Entity\Lieu;
 use App\Form\AnnonceType;
 use App\Repository\AnnonceRepository;
 use App\Repository\CategorieRepository;
-use App\Repository\LieuRepository;
+use App\Entity\Categorie;
+use App\Repository\ProducteurRepository;
+use DateTimeImmutable;
+use Producteur;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,14 +29,43 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/new', name: 'annonce_new', methods: ['GET','POST'])]
-    public function new(Request $request, CategorieRepository $categorieRepository): Response
+    public function new(Request $request, CategorieRepository $categorieRepository, ProducteurRepository $producteurRepository): Response
     {
+        $entityManager = $this->getDoctrine()->getManager();
+        
         $annonce = new Annonce();
-        $form = $this->createForm(AnnonceType::class, $annonce);
-        $form->handleRequest($request);
+        $lieu = new Lieu();
+        
+        
+        if ($request->request->get('inscription') != NULL ) {
+            $creneauxDebut = new DateTimeImmutable($request->request->get('creneauxDebut'));
+            $creneauxFin = new DateTimeImmutable($request->request->get('creneauxFin'));
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $categorie = $categorieRepository->find($request->request->get('categorie'));
+            $producteur = $producteurRepository->find($this->getUser());
+            dump($request->request->get('categorie'));
+            dump($this->getUser());
+            dump($categorie);
+            dump($producteur);
+
+            $coordonne = explode(',', $request->request->get('lieu'));
+            $lieu->setCooX($coordonne[0]);
+            $lieu->setCooY($coordonne[1]);
+            $lieu->setNom($request->request->get('lieuNom'));
+            $lieu->setDescLieu($request->request->get('lieuDescription'));
+
+
+            $annonce->setCreneauxDebut($creneauxDebut);
+            $annonce->setCreneauxFin($creneauxFin);
+            $annonce->setLibelleProduit($request->request->get('libelleProduit'));
+            $annonce->setPrixUnitaire($request->request->get('prixUnitaire'));
+            $annonce->setQuantite($request->request->get('quantite'));
+            $annonce->setCategorie($categorie);
+            $annonce->setStatus('PasEnLigne');
+
+            $lieu->addAnnonce($annonce);
+            $producteur->addAnnonce($annonce);
+
             $entityManager->persist($annonce);
             $entityManager->flush();
 

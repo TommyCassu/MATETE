@@ -45,7 +45,7 @@ class Annonce
     private $quantite;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Lieu::class, inversedBy="Annonce")
+     * @ORM\ManyToOne(targetEntity=Lieu::class, inversedBy="Annonce", cascade={"persist"})
      */
     private $lieu;
 

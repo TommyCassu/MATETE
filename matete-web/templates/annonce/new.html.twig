@@ -9,11 +9,11 @@
     <div>
     <div>
             <label for="creneauxDebut">Créneaux début</label>
-            <input type="datetime" id="creneauxDebut" name="creneauxDebut" required >
+            <input type="datetime-local" id="creneauxDebut" name="creneauxDebut" required >
         </div>
         <div>
             <label for="creneauxFin">Créneaux fin</label>
-            <input type="datetime" id="creneauxFin" name="creneauxFin" required >
+            <input type="datetime-local" id="creneauxFin" name="creneauxFin" required >
         </div>
         <div>
             <label for="libelleProduit">Libelle de votre produit</label>
@@ -28,21 +28,28 @@
             <input type="number" step="1" id="quantite" name="quantite" required>
         </div>
         <div>
-            <label for="lieu">Lieu</label>
-            <input type="text" id="lieu" name="lieu" required>
-        </div>
-        <div>
             <label for="categorie">Categorie</label>
             <select name="categorie" id="categorie">
                 {% for categorie in categories %}
-                    <option value="{{ categorie.libelle }}">{{ categorie.libelle }}</option>
+                    <option value="{{ categorie.id }}">{{ categorie.libelle }}</option>
                 {% endfor %}
             </select>
+        </div>
+        <div>
+            <label for="lieu">Coordonné Lieu</label>
+            <input type="text" id="lieu" name="lieu" required>
+        </div>
+        <div>
+            <label for="lieuNom">Nom Lieu</label>
+            <input type="text" id="lieuNom" name="lieuNom" required>
+        </div>
+        <div>
+            <label for="lieuDescription">Description Lieu</label>
+            <input type="text" id="lieuDescription" name="lieuDescription" required>
         </div>
         
         <div>
             <input type="submit" id="inscription" name="inscription" value="Inscription">
-            <input type="hidden" name="crsf_token" value="{{ csrf_token('login_form') }}">
         </div>
     </div>
  </form>

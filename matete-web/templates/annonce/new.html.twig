@@ -3,6 +3,49 @@
 {% block title %}New Annonce{% endblock %}
 
 {% block body %}
+    <h1>Ajouter annonce </h1>
+
+ <form method="POST" action="{{ path('annonce_new') }}">
+    <div>
+    <div>
+            <label for="creneauxDebut">Créneaux début</label>
+            <input type="datetime" id="creneauxDebut" name="creneauxDebut" required >
+        </div>
+        <div>
+            <label for="creneauxFin">Créneaux fin</label>
+            <input type="datetime" id="creneauxFin" name="creneauxFin" required >
+        </div>
+        <div>
+            <label for="libelleProduit">Libelle de votre produit</label>
+            <input type="text" id="libelleProduit" name="libelleProduit" placeholder="Entrez un libelle" required >
+        </div>
+        <div>
+            <label for="prixUnitaire">Prix unitaire de votre produit</label>
+            <input type="number" step="0.01" id="prixUnitaire" name="prixUnitaire" required >
+        </div>
+        <div>
+            <label for="quantite">Quantité</label>
+            <input type="number" step="1" id="quantite" name="quantite" required>
+        </div>
+        <div>
+            <label for="lieu">Lieu</label>
+            <input type="text" id="lieu" name="lieu" required>
+        </div>
+        <div>
+            <label for="categorie">Categorie</label>
+            <select name="categorie" id="categorie">
+                {% for categorie in categories %}
+                    <option value="{{ categorie.libelle }}">{{ categorie.libelle }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div>
+            <input type="submit" id="inscription" name="inscription" value="Inscription">
+            <input type="hidden" name="crsf_token" value="{{ csrf_token('login_form') }}">
+        </div>
+    </div>
+ </form>
 
     <a href="{{ path('main_page') }}">back to list</a>
 {% endblock %}

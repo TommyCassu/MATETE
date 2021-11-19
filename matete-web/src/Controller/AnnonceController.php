@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Annonce;
 use App\Form\AnnonceType;
 use App\Repository\AnnonceRepository;
+use App\Repository\CategorieRepository;
 use App\Repository\LieuRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +25,7 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/new', name: 'annonce_new', methods: ['GET','POST'])]
-    public function new(Request $request): Response
+    public function new(Request $request, CategorieRepository $categorieRepository): Response
     {
         $annonce = new Annonce();
         $form = $this->createForm(AnnonceType::class, $annonce);
@@ -38,9 +39,8 @@ class AnnonceController extends AbstractController
             return $this->redirectToRoute('annonce_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('annonce/new.html.twig', [
-            'annonce' => $annonce,
-            'form' => $form,
+        return $this->render('annonce/new.html.twig', [
+            'categories' => $categorieRepository->findAll(),
         ]);
     }
 

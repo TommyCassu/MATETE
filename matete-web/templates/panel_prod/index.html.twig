@@ -56,14 +56,17 @@
     {# "Pop-up" de gauche #}
     <div class="z-50 bg-yellow-200 rounded-r-lg w-4/12 h-full left-0 absolute ">
         {# Image de profil #}
-        <div class="left-10  mt-15 mr-20 relative flex flex-row ">
-            <img class="rounded-full relative w-40 h-40 mt-4 ml-4 " src="https://place-hold.it/150x150" alt="">
+        {% set foo = random(7) %}
+        
+          {{ dump(foo ~ '.png') }}
+        <div class="left-5  mt-15 mr-20 relative flex flex-row ">
+            <img class="z-50 rounded-full relative w-48 h-40 mt-4 " src="{{ asset('image/' ~ foo ~ '.png') }}" alt="">
             {# Information de l'utilisateur #}
-             <div class="text-2xl  ml-20 relative">
-              <p class="mt-4" id="info">Nom : </p>
-              <p class="mt-4" id="info">Prenom :</p>
-              <p class="mt-4" id="info">Email : </p>
-              <p class="mt-4" id="info">Tel : </p>
+             <div class="text-2xl  ml-8 relative">
+              <p class="mt-4" id="info">Nom : {{app.user.nom}}</p>
+              <p class="mt-4" id="info">Prenom : {{app.user.prenom}}</p>
+              <p class="mt-4" id="info">Email : {{app.user.mail}}</p>
+              <p class="mt-4" id="info">Tel : {{app.user.tel}}</p>
           </div>
         </div>
         

@@ -15,8 +15,9 @@ class MainController extends AbstractController
     #[Route('/', name: 'main_page')]
     public function index(AnnonceRepository $annonceRepository, LieuRepository $lieuRepository): Response
     {
+        $user = $this->getUser();
+        dump($user);
         $lieux = $lieuRepository->findAll();
-
 
         $listeAnnonces = [];
         foreach ($lieux as $lieu) {
@@ -32,9 +33,14 @@ class MainController extends AbstractController
                 );
             }
         }
-
-        return $this->render('main/index.html.twig', [
-            'listeAnnonces' => $listeAnnonces,
-        ]);
+        if($user == null){
+            return $this->render('main/index.html.twig', [
+                'listeAnnonces' => $listeAnnonces,
+            ]);
+        }else{
+            return $this->render('panel_prod/index.html.twig', [
+                'listeAnnonces' => $listeAnnonces,
+            ]);
+        }
     }
 }

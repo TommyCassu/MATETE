@@ -43,7 +43,7 @@ class ProducteurController extends AbstractController
         $entityManager->persist($producteur);
         $entityManager->flush();
         
-        return $this->redirectToRoute("main_page");
+        return $this->redirectToRoute("panel_prod");
     }
 
     #[Route('/{id}', name: 'producteur_show', methods: ['GET'])]

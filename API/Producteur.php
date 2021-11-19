@@ -33,7 +33,7 @@ class Producteur {
     public function getTel() {
         return $this->tel;
     }
-
+    redirect
     public function getMail() {
         return $this->mail;
     }

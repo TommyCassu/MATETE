@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/administrateur')]
+#[Route('/panel/administrateur')]
 class AdministrateurController extends AbstractController
 {
     #[Route('/', name: 'administrateur_index', methods: ['GET'])]

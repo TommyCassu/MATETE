@@ -4,10 +4,42 @@
 
 {% block body %}
     <h1>Edit Producteur</h1>
-
-    {{ include('producteur/_form.html.twig', {'button_label': 'Update'}) }}
+    <p class="mt-4" id="info">Nom : {{app.user.nom}}</p>
+    {%dump(app.user.id)%}
+    <form method="POST" action="{{ path('producteur_edit') }}">
+    <div>
+    <div>
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" name="nom" placeholder="Entrez un nom" required >
+        </div>
+        <div>
+            <label for="prenom">Email</label>
+            <input type="text" id="prenom" name="prenom" placeholder="Entrez un prenom" required >
+        </div>
+        <div>
+            <label for="tel">Telephone</label>
+            <input type="tel" id="tel" name="tel" placeholder="Entrez un telephone" required >
+        </div>
+        <div>
+            <label for="Mail">Email</label>
+            <input type="mail" id="mail" name="mail" placeholder="Entrez un Email" required >
+        </div>
+        <div>
+            <label for="pass">Mot de passe</label>
+            <input type="password" id="pass" name="pass" required>
+        </div>
+        <div>
+            <label for="passConf">Confirmation du mot de passe</label>
+            <input type="password" id="passconf" name="passConf" required>
+        </div>
+        
+        <div>
+            <input type="submit" id="editInfo" name="editInfo" value="Inscription">
+            <input type="hidden" name="crsf_token" value="{{ csrf_token('login_form') }}">
+        </div>
+    </div>
+ </form>
 
     <a href="{{ path('producteur_index') }}">back to list</a>
 
-    {{ include('producteur/_delete_form.html.twig') }}
 {% endblock %}

@@ -57,18 +57,33 @@ class ProducteurController extends AbstractController
     #[Route('/{id}/edit', name: 'producteur_edit', methods: ['GET','POST'])]
     public function edit(Request $request, Producteur $producteur): Response
     {
-        $form = $this->createForm(ProducteurType::class, $producteur);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('producteur_index', [], Response::HTTP_SEE_OTHER);
+        
+        //Edition Nom
+        if ($request->request->get('nom') != null) {
+            $user->setNom($request->request->get('nom'));
         }
 
-        return $this->renderForm('producteur/edit.html.twig', [
-            'producteur' => $producteur,
-            'form' => $form,
+        //Edition Prenom
+        if ($request->request->get('prenom') != null) {
+            $user->setPrenom($request->request->get('prenom'));
+        }
+
+    //Edition Telephone
+        if ($request->request->get('tel') != null) {
+            $user->setTel($request->request->get('tel'));
+        }
+
+        //Edition Email
+        if ($request->request->get('mail') != null) {
+            $user->setMail($request->request->get('mail'));
+        }
+
+        
+
+    
+
+        return $this->render('producteur/edit.html.twig', [
+            'producteur' => $producteur
         ]);
     }
 

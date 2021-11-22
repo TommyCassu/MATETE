@@ -55,36 +55,67 @@ class ProducteurController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'producteur_edit', methods: ['GET','POST'])]
-    public function edit(Request $request, Producteur $producteur): Response
+    public function edit(Request $request, Producteur $producteur, UserPasswordEncoderInterface $userPass): Response
     {
-        
+        $entityManager = $this->getDoctrine()->getManager();
+
         //Edition Nom
         if ($request->request->get('nom') != null) {
-            $user->setNom($request->request->get('nom'));
+            $producteur->setNom($request->request->get('nom'));
         }
 
         //Edition Prenom
         if ($request->request->get('prenom') != null) {
-            $user->setPrenom($request->request->get('prenom'));
+            $producteur->setPrenom($request->request->get('prenom'));
         }
 
-    //Edition Telephone
+        //Edition Telephone
         if ($request->request->get('tel') != null) {
-            $user->setTel($request->request->get('tel'));
+            $producteur->setTel($request->request->get('tel'));
         }
 
         //Edition Email
         if ($request->request->get('mail') != null) {
-            $user->setMail($request->request->get('mail'));
+            $producteur->setMail($request->request->get('mail'));
         }
 
+        //Verification mot de passe
+        if ($request->request->get('passAnc') != null) {
+            $oldPassword = $request->request->get('passAnc');
+            $newPass = $request->request->get('pass');
+            $newPassConf = $request->request->get('passConf');
+            if ($userPass->isPasswordValid($producteur,$oldPassword)){
+                if ($newPass != null){
+                    if ($newPass == $newPassConf){
+                        if ($newPass != $oldPassword ){
+                            $passHash = ($userPass->encodePassword($producteur, $newPass)); 
+                            $producteur->setMdp($passHash);
+                        }else{
+                            $this->addFlash(
+                                'alert',
+                                'Votre nouveau mot de passe ne peut pas être identique a votre mot de passe actuel'
+                            );
+                        }
+                    }else{
+                        $this->addFlash(
+                            'alert',
+                            'Veuillez entrez deux mot de passe identique'
+                        );
+                    }
+                }else{
+                    $this->addFlash(
+                        'alert',
+                        'Veuillez rentrer le nouveau mot de passe'
+                    );
+                }
+            }
+        }
+        //$request->request->get('passAnc')
         
+        $entityManager->persist($producteur);
+        $entityManager->flush();
 
-    
-
-        return $this->render('producteur/edit.html.twig', [
-            'producteur' => $producteur
-        ]);
+        return $this->redirectToRoute("main_page");
     }
 
     #[Route('/{id}', name: 'producteur_delete', methods: ['POST'])]

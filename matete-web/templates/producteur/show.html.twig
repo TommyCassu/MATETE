@@ -5,29 +5,42 @@
 {% block body %}
     <h1>Producteur</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ producteur.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ producteur.nom }}</td>
-            </tr>
-            <tr>
-                <th>Prenom</th>
-                <td>{{ producteur.prenom }}</td>
-            </tr>
-            <tr>
-                <th>Tel</th>
-                <td>{{ producteur.tel }}</td>
-            </tr>
-            <tr>
-                <th>Mail</th>
-                <td>{{ producteur.mail }}</td>
-            </tr>
-        </tbody>
-    </table>
-    {% include "include/retour.html.twig" %}
+    <form method="POST" action="{{ path('producteur_edit',{'id':producteur.id}) }}">
+    <div>
+    <div>
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" name="nom" placeholder="{{producteur.nom}}">
+        </div>
+        <div>
+            <label for="prenom">Email</label>
+            <input type="text" id="prenom" name="prenom" placeholder="{{producteur.prenom}}"  >
+        </div>
+        <div>
+            <label for="tel">Telephone</label>
+            <input type="tel" id="tel" name="tel" placeholder="{{producteur.tel}}">
+        </div>
+        <div>
+            <label for="Mail">Email</label>
+            <input type="mail" id="mail" name="mail" placeholder="{{producteur.mail}}" >
+        </div>
+        <div>
+            <label for="passAnc">Ancien mot de passe</label>
+            <input type="password" id="passAnc" name="passAnc" placeholder="Mot de passe actuel">
+        </div>
+        <div>
+            <label for="pass">Mot de passe</label>
+            <input type="password" id="pass" name="pass">
+        </div>
+        <div>
+            <label for="passConf">Confirmation du mot de passe</label>
+            <input type="password" id="passconf" name="passConf">
+        </div>
+        
+        <div>
+            <input type="submit" id="editInfo" name="editInfo" value="Confirmer">
+        
+        </div>
+    </div>
+ </form>
+    
 {% endblock %}

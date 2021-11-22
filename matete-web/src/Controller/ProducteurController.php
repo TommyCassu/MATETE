@@ -32,13 +32,20 @@ class ProducteurController extends AbstractController
 
         $producteur = new Producteur();
 
-        $passHash = ($userPass->encodePassword($producteur, $request->request->get('pass')));
+        if ($request->request->get('pass') == $request->request->get('passConf')) {
+            $passHash = ($userPass->encodePassword($producteur, $request->request->get('pass')));
+            $producteur->setMdp($passHash);
 
-        $producteur->setNom($request->request->get('nom'));
-        $producteur->setPrenom($request->request->get('prenom'));
-        $producteur->setTel($request->request->get('tel'));
-        $producteur->setMail($request->request->get('mail'));
-        $producteur->setMdp($passHash);
+            $producteur->setNom($request->request->get('nom'));
+            $producteur->setPrenom($request->request->get('prenom'));
+            $producteur->setTel($request->request->get('tel'));
+            $producteur->setMail($request->request->get('mail'));
+        } else {
+            $this->addFlash(
+                'alert',
+                "Vos mots de passe ne sont pas identique !"
+            );
+        }
 
         $entityManager->persist($producteur);
         $entityManager->flush();

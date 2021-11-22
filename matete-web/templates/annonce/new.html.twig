@@ -2,6 +2,8 @@
 
 {% block title %}New Annonce{% endblock %}
 
+
+
 {% block body %}
     <h1>Ajouter annonce </h1>
 
@@ -54,5 +56,6 @@
     </div>
  </form>
 
-    <a href="{{ path('main_page') }}">back to list</a>
+ {% include "include/retour.html.twig" %}
+
 {% endblock %}

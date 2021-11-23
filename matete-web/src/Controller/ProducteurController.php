@@ -2,11 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Lieu;
 use App\Entity\Producteur;
-use App\Form\ProducteurType;
-use App\Repository\AnnonceRepository;
-use App\Repository\LieuRepository;
 use App\Repository\ProducteurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,7 +22,7 @@ class ProducteurController extends AbstractController
     }
 
     #[Route('/new', name: 'producteur_new', methods: ['GET','POST'])]
-    public function new(Request $request, LieuRepository $lieuRepository, AnnonceRepository $annonceRepository, UserPasswordEncoderInterface $userPass): Response
+    public function new(Request $request,UserPasswordEncoderInterface $userPass): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -40,17 +36,20 @@ class ProducteurController extends AbstractController
             $producteur->setPrenom($request->request->get('prenom'));
             $producteur->setTel($request->request->get('tel'));
             $producteur->setMail($request->request->get('mail'));
+
+            $entityManager->persist($producteur);
+            $entityManager->flush();
+            
+            return $this->redirectToRoute("login_security");
         } else {
             $this->addFlash(
-                'alert',
+                'notice',
                 "Vos mots de passe ne sont pas identique !"
             );
-        }
 
-        $entityManager->persist($producteur);
-        $entityManager->flush();
-        
-        return $this->redirectToRoute("panel_prod");
+            return $this->redirectToRoute("register_security");
+
+        }
     }
 
     #[Route('/{id}', name: 'producteur_show', methods: ['GET'])]

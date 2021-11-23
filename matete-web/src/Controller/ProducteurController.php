@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-#[Route('/producteur')]
+#[Route('/panel/producteur')]
 class ProducteurController extends AbstractController
 {
     #[Route('/', name: 'producteur_index', methods: ['GET'])]

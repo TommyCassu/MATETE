@@ -16,7 +16,6 @@ class MainController extends AbstractController
     public function index(AnnonceRepository $annonceRepository, LieuRepository $lieuRepository): Response
     {
         $user = $this->getUser();
-        dump($user);
         $lieux = $lieuRepository->findAll();
 
         $listeAnnonces = [];

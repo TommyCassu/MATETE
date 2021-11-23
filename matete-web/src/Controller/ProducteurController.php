@@ -22,31 +22,41 @@ class ProducteurController extends AbstractController
     }
 
     #[Route('/new', name: 'producteur_new', methods: ['GET','POST'])]
-    public function new(Request $request,UserPasswordEncoderInterface $userPass): Response
+    public function new(Request $request,UserPasswordEncoderInterface $userPass, ProducteurRepository $producteurRepository): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
 
         $producteur = new Producteur();
+        $userProd = $producteurRepository->findOneByMail($request->request->get('mail'));
 
-        if ($request->request->get('pass') == $request->request->get('passConf')) {
-            $passHash = ($userPass->encodePassword($producteur, $request->request->get('pass')));
-            $producteur->setMdp($passHash);
+        if (!$userProd) {
+            if ($request->request->get('pass') == $request->request->get('passConf')) {
+                $passHash = ($userPass->encodePassword($producteur, $request->request->get('pass')));
+                $producteur->setMdp($passHash);
 
-            $producteur->setNom($request->request->get('nom'));
-            $producteur->setPrenom($request->request->get('prenom'));
-            $producteur->setTel($request->request->get('tel'));
-            $producteur->setMail($request->request->get('mail'));
+                $producteur->setNom($request->request->get('nom'));
+                $producteur->setPrenom($request->request->get('prenom'));
+                $producteur->setTel($request->request->get('tel'));
+                $producteur->setMail($request->request->get('mail'));
 
-            $entityManager->persist($producteur);
-            $entityManager->flush();
-            
-            return $this->redirectToRoute("login_security");
-        } else {
+                $entityManager->persist($producteur);
+                $entityManager->flush();
+                
+                return $this->redirectToRoute("login_security");
+            } else {
+                $this->addFlash(
+                    'alert',
+                    "Vos mots de passe ne sont pas identique !"
+                );
+
+                return $this->redirectToRoute("register_security");
+
+            }
+        }  else {
             $this->addFlash(
-                'notice',
-                "Vos mots de passe ne sont pas identique !"
+                'alert',
+                "L'adresse mail est déja utilisé !"
             );
-
             return $this->redirectToRoute("register_security");
 
         }

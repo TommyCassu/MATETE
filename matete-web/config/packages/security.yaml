@@ -35,7 +35,6 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/panel/producteur/new, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/panel/prod, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/panel, roles: ROLE_USER }
         - { path: ^/acceuil, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }

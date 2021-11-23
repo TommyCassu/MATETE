@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block body %}
+
+ {# <form method="POST" action="{{ path('producteur_new') }}"> 
+    <div>
+    <div>
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" name="nom" placeholder="Entrez un nom" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none "required >
+        </div>
+        <div>
+            <label for="prenom">Prenom</label>
+            <input type="text" id="prenom" name="prenom" placeholder="Entrez un prenom" required >
+        </div>
+        <div>
+            <label for="tel">Telephone</label>
+            <input type="tel" id="tel" name="tel" placeholder="Entrez un telephone" required >
+        </div>
+        <div>
+            <label for="Mail">Email</label>
+            <input type="mail" id="mail" name="mail" placeholder="Entrez un Email" required >
+        </div>
+        <div>
+            <label for="pass">Mot de passe</label>
+            <input type="password" id="pass" name="pass" required>
+        </div>
+        <div>
+            <label for="passConf">Confirmation du mot de passe</label>
+            <input type="password" id="passconf" name="passConf" required>
+        </div>
+        
+        <div>
+            <input type="submit" id="inscription" name="inscription" value="Inscription">
+            <input type="hidden" name="crsf_token" value="{{ csrf_token('login_form') }}">
+        </div>
+    </div>
+#}
+
+    <div class="absolute w-screen h-screen flex flex-col ">
+            {# Logo Matete #}
+            <div class="flex justify-center m-14" >
+                <img class="w-3/12 h-3/12" src="{{ asset('image/logotexte.png') }}">
+            </div>
+            {# Formulaire de connexion #}
+            <div class="px-10 w-auto p-4 shadow-2xl mx-auto rounded-2xl bg-white justify-center">
+                <div class="px-10 w-96 p-4 mx-auto">
+                    {# Titre #}
+                    <div class="flex justify-center text-4xl font-extrabold">
+                        <h1>Inscription</h1>
+                    </div>
+                    {# Zone de saisie Nom #}
+                    <div class="mt-5">
+                        <label for="nom">Nom :</label>
+                        <input type="text" id="nom" name="nom" placeholder="Entrez un nom" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " required >
+                    </div>
+                    {# Zone de saisie Prenom #}    
+                    <div>
+                        <label for="prenom">Prenom :</label>
+                        <input type="text" id="prenom" name="prenom" placeholder="Entrez un prenom" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " required >
+                    </div>
+                    {# Zone saisie Tel #}
+                    <div>
+                        <label for="tel">Telephone :</label>
+                        <input type="tel" id="tel" name="tel" placeholder="Entrez un telephone" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " required >
+                    </div>
+                    {# Zone saisie Email #}
+                    <div>
+                        <label for="Mail">Email :</label><br>
+                        <input type="mail" id="mail" name="mail" placeholder="Entrez un Email" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " required >
+                    </div>
+                    {# Zone saisie de MDP #}
+                    <div>
+                        <label for="pass">Mot de passe :</label>
+                        <input placeholder="Entrez un mot de passe" type="password" id="pass" name="pass" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " required>
+                    </div>
+                    {# Zone saisie 2nd MDP #}
+                    <div>
+                        <label for="passConf">Confirmation du mot de passe :</label>
+                        <input placeholder="Confirmer le mot de passe" type="password" id="passconf" name="passConf" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " required>
+                    </div>
+                    {#  #}
+                    <div class="mt-5 flex justify-center">
+                        <input class="w-5/12 p-2.5  bg-yellow-300 border-yellow-900 rounded-lg" type="submit" id="inscription" name="inscription" value="Inscription">
+                        <input type="hidden" name="crsf_token" value="{{ csrf_token('login_form') }}">
+                    </div>
+            </div>
+        </div> 
+        </div>
+ </form>
+  {# Image de fond #}
+ <div class="h-screen w-screen bg-no-repeat bg-cover" style="background-image:url('{{ asset('image/Carte.png') }}')"></div>
+
+{% include "include/retour.html.twig" %}  
+
+{% endblock %}

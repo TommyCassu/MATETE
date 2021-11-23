@@ -1,0 +1,115 @@
+ {% extends 'base.html.twig' %}
+
+{% block title %}New Annonce{% endblock %}
+
+
+
+{% block body %}
+
+ <form method="POST" action="{{ path('annonce_new') }}">
+
+    <div class="absolute w-screen h-screen flex flex-col">
+            {# Logo Matete #}
+            <div class="flex justify-center m-16" >
+                <img class="w-3/12 h-3/12" src="{{ asset('image/logotexte.png') }}">
+            </div>
+            {# Formulaire de connexion #}
+            <div class="px-10 p-4 shadow-2xl mx-auto rounded-2xl bg-white">
+                <div class="">
+                    {#  #}
+                    <div class="flex justify-center text-4xl font-extrabold">
+                        <h1>Ajouter un annonce</h1>
+                    </div>
+                    {# Ligne N°1 #}
+                    <div class="flex justify-centrer mx-auto">
+                        {# Zone de saisie Créneaux début #}
+                        <div class="mt-5 w-5/12">
+                            <label for="Mail">Créneaux début :</label><br>
+                            <input type="datetime-local" id="creneauxDebut" name="creneauxDebut" placeholder="Entrez un Créneaux" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " required>
+                        </div>
+                        <div class="mt-5 w-2/12 ">
+                        </div>
+                        {# Zone de saisie Créneaux Fin #}    
+                        <div class="mt-5 w-5/12 ">
+                            <label for="pass">Créneaux Fin :</label>
+                            <input type="datetime-local" id="creneauxFin" name="creneauxFin" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " placeholder="Saisir un Créneaux de fin" required>
+                        </div>
+                    </div>
+                    {# Ligne N°2 #}
+                    <div class="flex justify-centrer mx-auto">
+                        {# Zone de saisie Libellé produit #}
+                        <div class="mt-5 w-5/12">
+                            <label for="Mail">Libellé du produit :</label><br>
+                            <input type="text" id="libelleProduit" name="libelleProduit" placeholder="Entrez un libellé" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " required>
+                        </div>
+                        <div class="mt-5 w-2/12 ">
+                        </div>
+                        {# Zone de saisie Prix Unitaire #}    
+                        <div class="mt-5 w-5/12 ">
+                            <label for="pass">Prix Unitaire :</label>
+                            <input type="number" step="0.01" id="prixUnitaire" name="prixUnitaire" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " placeholder="Saisir le Prix/unité" required>
+                        </div>
+                    </div>
+
+                    {# Ligne N°3 #}
+                    <div class="flex justify-centrer mx-auto">
+                        {# Zone de saisie Quantité #}
+                        <div class="mt-5 w-5/12">
+                            <label for="Mail">Quantité :</label><br>
+                            <input type="number" step="1" id="quantite" name="quantite" placeholder="Entrez une Quantité" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " required>
+                        </div>
+                        <div class="mt-5 w-2/12 ">
+                        </div>
+                        {# Zone de saisie Catégorie #}    
+                        <div class="mt-5 w-5/12 ">
+                            <label for="pass">Catégorie :</label><br>
+                            <select name="categorie" id="categorie" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none">
+                                <option value="" disabled selected >Choisir une catégorie</option>
+                                {% for categorie in categories %}
+                                    <option value="{{ categorie.id }}">{{ categorie.libelle }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    {# Ligne N°4 #}
+                    <div class="flex justify-centrer mx-auto">
+                        {# Zone de saisie Nom du lieu #}
+                        <div class="mt-5 w-5/12">
+                            <label for="Mail">Nom du lieu :</label><br>
+                            <input type="text" id="lieuNom" name="lieuNom" placeholder="Entrez le nom du lieu " class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " required>
+                        </div>
+                        <div class="mt-5 w-2/12 ">
+                        </div>
+                        {# Zone de saisie Coordonnées du lieu #}    
+                        <div class="mt-5 w-5/12 ">
+                            <label for="pass">Coordonnées lieu :</label>
+                            <input type="text" id="lieu" name="lieu" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " placeholder="Saisir la description du lieu" required>
+                        </div>
+                    </div>
+
+                    {# Ligne N°4 #}
+                    <div class="flex justify-centrer mx-auto">                
+                        {# Zone de saisie Description du lieu #}    
+                        <div class="mt-5 w-7/12 mx-auto ">
+                            <label for="Description">Description lieu :</label>
+                            <input type="text"  id="lieuDescription" name="lieuDescription" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " placeholder="Saisir la description du lieu" required>
+                        </div>
+                    </div>
+
+
+                    {# Boutons de Ajout d'annonce #}
+                    <div class="mt-5 flex justify-center">
+                        <input type="submit" id="inscription" name="inscription" value="Créer l'annonce" class="w-5/12 p-2.5  bg-yellow-300 rounded-lg">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token('log_form') }}">
+                </div>
+            </div>
+        </div> 
+        </div>
+ </form>
+   {# Image de fond #}
+ <div class="h-screen w-screen bg-no-repeat bg-cover" style="background-image:url('{{ asset('image/Carte.png') }}')"></div>
+
+ {% include "include/retour.html.twig" %}
+
+{% endblock %}

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Producteur;
 use App\Repository\ProducteurRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -134,15 +135,22 @@ class ProducteurController extends AbstractController
         return $this->redirectToRoute("main_page");
     }
 
-    #[Route('/{id}', name: 'producteur_delete', methods: ['POST'])]
-    public function delete(Request $request, Producteur $producteur): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$producteur->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($producteur);
-            $entityManager->flush();
-        }
+    #[Route('/{id}/delete', name: 'producteur_delete', methods: ['GET'])]
+    public function delete(Request $request, Producteur $producteur, EntityManagerInterface $manager): Response
+    {   
+        dd('test');
+        $manager->remove($producteur);
+        $manager->flush();
 
-        return $this->redirectToRoute('producteur_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('main_page');
     }
+
+    #[Route('/confirmationSupression/{id}', name: 'producteur_confDelete', methods: ['GET'])]
+    public function confirmationDelete(Producteur $producteur): Response
+    {
+        return $this->render('producteur/_confDelete_form.html.twig', [
+            'producteur' => $producteur,
+        ]);
+    }
+
 }

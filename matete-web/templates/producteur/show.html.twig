@@ -3,44 +3,102 @@
 {% block title %}Producteur{% endblock %}
 
 {% block body %}
-    <h1>Producteur</h1>
+
+{% include "include/retour.html.twig" %}
 
     <form method="POST" action="{{ path('producteur_edit',{'id':producteur.id}) }}">
-    <div>
-    <div>
-            <label for="nom">Nom</label>
-            <input type="text" id="nom" name="nom" placeholder="{{producteur.nom}}">
-        </div>
-        <div>
-            <label for="prenom">Email</label>
-            <input type="text" id="prenom" name="prenom" placeholder="{{producteur.prenom}}"  >
-        </div>
-        <div>
-            <label for="tel">Telephone</label>
-            <input type="tel" id="tel" name="tel" placeholder="{{producteur.tel}}">
-        </div>
-        <div>
-            <label for="Mail">Email</label>
-            <input type="mail" id="mail" name="mail" placeholder="{{producteur.mail}}" >
-        </div>
-        <div>
-            <label for="passAnc">Ancien mot de passe</label>
-            <input type="password" id="passAnc" name="passAnc" placeholder="Mot de passe actuel">
-        </div>
-        <div>
-            <label for="pass">Mot de passe</label>
-            <input type="password" id="pass" name="pass">
-        </div>
-        <div>
-            <label for="passConf">Confirmation du mot de passe</label>
-            <input type="password" id="passconf" name="passConf">
-        </div>
-        
-        <div>
-            <input type="submit" id="editInfo" name="editInfo" value="Confirmer">
-        
-        </div>
-    </div>
+    {# Met en colonne #}
+    <div class="absolute w-screen h-screen flex flex-col">
+            {# Logo Matete #}
+            <div class="flex justify-center m-16" >
+                <img class="w-3/12 h-3/12" src="{{ asset('image/logotexte.png') }}">
+            </div>
+            {# Formulaire de gestion de compte #}
+            <div class="px-10 p-4 shadow-2xl mx-auto rounded-2xl bg-white">
+                <div class="">
+                    {# Titre #}
+                    <div class="flex justify-center text-4xl font-extrabold">
+                        <h1>Gestion de compte</h1>
+                    </div>
+                    {# Ligne N°1 #}
+                    <div class="flex justify-centrer mx-auto">
+                        {# Zone de saisie Nom #}
+                        <div class="mt-5 w-5/12">
+                            <label for="nom">Nom :</label>
+                            <input type="text" id="nom" name="nom" placeholder="{{producteur.nom}}" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none" >
+                        </div>
+                        {# Séparateur Milieu #}
+                        <div class="mt-5 w-2/12 "></div>
+                        {# Zone de saisie Ancien mot de passe #}    
+                        <div class="mt-5 w-5/12 ">
+                            <label for="passAnc">Ancien mot de passe :</label>
+                            <input type="password" id="passAnc" name="passAnc" placeholder="Mot de passe actuel" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " >
+                        </div>
+                    </div>
+                    {# Ligne N°2 #}
+                    <div class="flex justify-centrer mx-auto">
+                        {# Zone de saisie Prénom #}
+                        <div class="mt-5 w-5/12">
+                            <label for="prenom">Prénom :</label>
+                            <input type="text" id="prenom" name="prenom" placeholder="{{producteur.prenom}}"  class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " >
+                        </div>
+                        {# Séparateur Milieu #}
+                        <div class="mt-5 w-2/12 "></div>
+                        {# Zone de saisie Nouveau Mot de passe #}    
+                        <div class="mt-5 w-5/12 ">
+                            <label for="pass">Nouveau mot de passe :</label>
+                            <input type="password" id="pass" name="pass" placeholder="Nouveau mot de passe" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " >
+                        </div>
+                    </div>
+                    {# Ligne N°3 #}
+                    <div class="flex justify-centrer mx-auto">
+                        {# Zone de saisie Téléphone #}
+                        <div class="mt-5 w-5/12">
+                            <label for="tel">Telephone :</label>
+                            <input type="tel" id="tel" name="tel" placeholder="{{producteur.tel}}" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " >    
+                        </div>
+                        {# Séparateur Milieu #}
+                        <div class="mt-5 w-2/12 "></div>
+                        {# Zone de saisie Confirmation du mot de passe #}    
+                        <div class="mt-5 w-5/12 ">
+                           <label for="passConf">Confirmation du mot de passe :</label>
+                           <input type="password" id="passconf" name="passConf" placeholder="Confirmation du mot de passe" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " >
+                        </div>
+                    </div>
+
+                    {# Ligne N°4 #}
+                    <div class="flex justify-centrer mx-auto">
+                        {# Zone de saisie Email #}
+                        <div class="mt-5 w-5/12">
+                            <label for="Mail">Email :</label>
+                            <input type="mail" id="mail" name="mail" placeholder="{{producteur.mail}}" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none "> 
+                        </div>
+                        {# Séparateur Milieu #}
+                        <div class="mt-5 w-2/12 "></div>
+                        {# Bouton submit "Confirmer" #}
+                        <div class="w-5/12 flex justify-end">
+                            <div class="mt-10 w-5/12 flex justify-center">
+                                <input type="submit" id="editInfo" name="editInfo" value="Confirmer" class="w-10/12 p-2.5  bg-yellow-300 rounded-lg cursor-pointer">
+                            </div>
+                            {# Bouton submit "Supprimer" #}
+                            <div class="mt-10 w-5/12 flex justify-center">
+                                <form action="{{ path('producteur_delete',{'id': app.user.id}) }}" method="GET">
+                                <button type="submit" id="delAcc" name="delAcc" value="Supprimer" class="w-10/12 p-2.5  bg-red-600 rounded-lg cursor-pointer text-white"> Supprimer</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {# Info+ #}
+                    <div class="mt-5">
+                        <a href="#" class="text-sm underline text-gray-600">* Seules les informations que vous voulez modifier sont à saisir </a>
+                    </div>
+                </div>
+                
+            </div>
+
  </form>
+ {# Image de fond #}
+ <div class="h-screen w-screen bg-no-repeat bg-cover" style="background-image:url('{{ asset('image/Carte.png') }}')"></div>
     
 {% endblock %}

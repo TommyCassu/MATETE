@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#00000000"
+    android:orientation="horizontal"
+    android:padding="1dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/new_project__39_"
+        android:clipToPadding="false"
+        android:paddingStart="100px"
+        android:paddingTop="30px">
+
+
+        <CheckBox
+            android:id="@+id/CheckBRecycler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="CheckBox"
+            android:textAllCaps="true"
+            android:textColor="#000000"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+</LinearLayout>

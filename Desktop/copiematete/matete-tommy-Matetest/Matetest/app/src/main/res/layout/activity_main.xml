@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondappli__1_"
+    tools:context=".SecondActivity">
+
+    <Button
+        android:id="@+id/buttonValidez"
+        android:layout_width="325dp"
+        android:layout_height="79dp"
+        android:backgroundTint="#FDE68A"
+        android:text="filtre"
+        android:textAlignment="textStart"
+        android:textColor="#000000"
+        android:textIsSelectable="false"
+        android:textSize="45px"
+        app:cornerRadius="40px"
+        app:icon="@drawable/ic_baseline_filter_alt_24"
+        app:iconTint="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.774" />
+
+    <Button
+        android:id="@+id/buttonVoirAnnonce"
+        android:layout_width="325dp"
+        android:layout_height="79dp"
+        android:autoText="false"
+        android:backgroundTint="#FDE68A"
+        android:text="Voir les annonces"
+        android:textAlignment="textStart"
+        android:textColor="#000000"
+        android:textSize="45px"
+        app:cornerRadius="40px"
+        app:icon="?android:attr/actionModeFindDrawable"
+        app:iconTint="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.579" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

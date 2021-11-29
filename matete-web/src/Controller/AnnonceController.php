@@ -36,17 +36,18 @@ class AnnonceController extends AbstractController
         $annonce = new Annonce();
         $lieu = new Lieu();
         
-        
+        $lieux = $producteurRepository->find($this->getUser());
+        foreach ($lieux->getLieux() as $l) {
+          dump($l);  
+        }
+        dump($lieux);
+            
         if ($request->request->get('inscription') != NULL ) {
             $creneauxDebut = new DateTimeImmutable($request->request->get('creneauxDebut'));
             $creneauxFin = new DateTimeImmutable($request->request->get('creneauxFin'));
 
             $categorie = $categorieRepository->find($request->request->get('categorie'));
             $producteur = $producteurRepository->find($this->getUser());
-            dump($request->request->get('categorie'));
-            dump($this->getUser());
-            dump($categorie);
-            dump($producteur);
 
             $coordonne = explode(',', $request->request->get('lieu'));
             $lieu->setCooX($coordonne[0]);

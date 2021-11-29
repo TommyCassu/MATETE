@@ -74,26 +74,22 @@
 
                     {# Ligne N°4 #}
                     <div class="flex justify-centrer mx-auto">
-                        {# Zone de saisie Nom du lieu #}
+                        {# Zone de select du lieu #}
                         <div class="mt-5 w-5/12">
-                            <label for="Mail">Nom du lieu :</label><br>
-                            <input type="text" id="lieuNom" name="lieuNom" placeholder="Entrez le nom du lieu " class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " required>
+                            <label for="Mail">Lieu :</label><br>
+                            <select name="categorie" id="categorie" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none">
+                                <option value="" disabled selected >Selectionner un lieu</option>
+                                {% for categorie in categories %}
+                                    <option value="{{ categorie.id }}">{{ categorie.libelle }}</option>
+                                {% endfor %}
+                            </select>
                         </div>
                         <div class="mt-5 w-2/12 ">
                         </div>
-                        {# Zone de saisie Coordonnées du lieu #}    
+                        {# Bouton création de lieu #}    
                         <div class="mt-5 w-5/12 ">
-                            <label for="pass">Coordonnées lieu :</label>
-                            <input type="text" id="lieu" name="lieu" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " placeholder="Saisir la description du lieu" required>
-                        </div>
-                    </div>
-
-                    {# Ligne N°4 #}
-                    <div class="flex justify-centrer mx-auto">                
-                        {# Zone de saisie Description du lieu #}    
-                        <div class="mt-5 w-7/12 mx-auto ">
-                            <label for="Description">Description lieu :</label>
-                            <input type="text"  id="lieuDescription" name="lieuDescription" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " placeholder="Saisir la description du lieu" required>
+                            <label for="pass"></label>
+                            <button type="submit" id="lieu" name="lieu" class="bg-yellow-300 rounded-lg my-1.5 mt-7 h-10 w-full p-1 focus:outline-none" required>Créer un Lieu</button>
                         </div>
                     </div>
 

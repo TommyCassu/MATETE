@@ -3,7 +3,7 @@
 {% block title %}Hello MainController!{% endblock %}
 
 {% block body %}
-
+{% include "include/notif.html.twig" %}
   <form method="POST" action="{{ path('login_security') }}">
         
         
@@ -22,17 +22,17 @@
                     {# Zone de saisie Email #}
                     <div class="mt-5">
                         <label for="Mail">Email :</label><br>
-                        <input type="mail" id="mail" name="mail" placeholder="Entrez un Email" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " required>
+                        <input type="mail" id="mail" name="mail" placeholder="Entrez un Email" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none ">
                     </div>
                     {# Zone de saisie MDP #}    
                     <div class="mt-5">
                         <label for="pass">Mot de passe :</label>
-                        <input type="password" id="pass" name="pass" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " placeholder="Saisir votre mot de passe" required>
+                        <input type="password" id="pass" name="pass" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " placeholder="Saisir votre mot de passe" >
                     </div>
                     {# Boutons de Connexion/Inscription #}
                     <div class="mt-5 flex justify-between">
-                        <button class="w-5/12 p-2.5  bg-yellow-300 border-yellow-900 rounded-lg"><a href="{{ path('register_security') }}"> Inscription </a></button>
-                        <input type="submit" id="connexion" name="connexion" value="Connexion" class="w-5/12 p-2.5  bg-yellow-300 border-yellow-900 rounded-lg">
+                        <button class="send w-5/12 p-2.5  bg-yellow-300 border-yellow-900 rounded-lg"><a href="{{ path('register_security') }}"> Inscription </a></button>
+                        <input type="submit" id="connexion" name="connexion" value="Connexion" class="send w-5/12 p-2.5 cursor-pointer bg-yellow-300 border-yellow-900 rounded-lg">
                         <input type="hidden" name="csrf_token" value="{{ csrf_token('log_form') }}">
                 </div>
                     {# Mot de passe oublié #}
@@ -46,6 +46,12 @@
  {# Image de fond #}
  <div class="h-screen w-screen bg-no-repeat bg-cover" style="background-image:url('{{ asset('image/Carte.png') }}')">
     </div>
+
+<style>
+    .send:hover {
+        background-color: #FBBF24;
+    }
+</style>
 
 {% include "include/retour.html.twig" %}
 

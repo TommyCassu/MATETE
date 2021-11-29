@@ -1,0 +1,33 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+    #info{
+        font-family: 'Bebas Neue', cursive;
+    }
+  </style> 
+
+
+  <script>
+    function initMap() {
+    const lycée = { lat: 42.69276266087135, lng: 2.909845647650987 };
+
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,
+        center: lycée,
+        //permet de cacher les boutons "Satellite" et "Plan"
+        mapTypeControl: false,
+        mapTypeControlOptions: {
+            style: google.maps.MapTypeControlStyle.VERTICAL_BAR,
+            position: google.maps.ControlPosition.TOP_RIGHT
+    },
+      });
+      
+
+      {% for liste in listeAnnonces %}
+
+        var marker = new google.maps.Marker({
+          position: { lat: {{ liste.cooX }} , lng: {{liste.cooY}} },
+          map: map,
+        });
+      {% endfor %}
+    }
+  </script>

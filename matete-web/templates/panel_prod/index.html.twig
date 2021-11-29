@@ -12,28 +12,17 @@
       }
     </style>
 
-     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-        #info{
-            font-family: 'Bebas Neue', cursive;
-        }
-    </style> 
+{% include "include/maps.html.twig" %}
+{% include "include/mainPage.html.twig" %}
 
-
-  <script>
-    function initMap() {
-    const lycée = { lat: 42.69276266087135, lng: 2.909845647650987 };
-
-      const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 15,
-        center: lycée,
-        //permet de cacher les boutons "Satellite" et "Plan"
-        mapTypeControl: false,
-        mapTypeControlOptions: {
-            style: google.maps.MapTypeControlStyle.VERTICAL_BAR,
-            position: google.maps.ControlPosition.TOP_RIGHT
-    },
-      });
+  {# "Pop-up" de gauche #}
+  <div class="z-50 bg-yellow-200 rounded-r-lg w-4/12 h-full left-0 absolute ">
+      {# Bouton Gestion de compte #}
+      <div> 
+        <a href="{{ path('producteur_show',{'id':app.user.id}) }}">
+          <button class="z-50 bg-yellow-900 w-20 h-20 left-10 absolute top-60 mr-16 border-yellow-900 border-4 border-opacity-25" onclick="{{ path('producteur_show',{'id':app.user.id}) }}"><i class="">test</i></button>
+        </a>
+      </div>
       
 
       {% for liste in listeAnnonces %}
@@ -132,19 +121,15 @@
       <div id="map" class="z-20 w-full h-full"></div>
     </div>
 
+  {# Map google #}
+  <div class=" h-screen w-9/12 right-0 absolute">
+    <div id="map" class="z-20 w-full h-full"></div>
+  </div>
 
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5t3C0OHeTuknC62DdKqOeqNPhMAhdITU&callback=initMap&libraries=&v=weekly"
-      async>
-    </script>
 
-<style>
-  .rotate:hover{
-    -webkit-transform: rotate(360deg);
-    -webkit-transition-duration: 1s;
-    -webkit-transition-delay: now;
-    -webkit-animation-timing-function: linear;
-    -webkit-animation-iteration-count: infinite;
-  }
-</style>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5t3C0OHeTuknC62DdKqOeqNPhMAhdITU&callback=initMap&libraries=&v=weekly"
+    async>
+  </script>
+    
 {% endblock %}

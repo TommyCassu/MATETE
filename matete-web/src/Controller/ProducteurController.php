@@ -135,14 +135,12 @@ class ProducteurController extends AbstractController
         return $this->redirectToRoute("main_page");
     }
 
-    #[Route('/{id}/delete', name: 'producteur_delete', methods: ['GET'])]
+    #[Route('/{id}/delete', name: 'producteur_delete')]
     public function delete(Request $request, Producteur $producteur, EntityManagerInterface $manager): Response
     {   
-        dd('test');
         $manager->remove($producteur);
         $manager->flush();
 
-        return $this->redirectToRoute('main_page');
     }
 
     #[Route('/confirmationSupression/{id}', name: 'producteur_confDelete', methods: ['GET'])]

@@ -36,6 +36,7 @@ class LoginFormAuthenticator extends AbstractAuthenticator
         $producteur = $this->producteurRepository->findOneByMail($request->request->get('mail'));
 
         if (!$producteur) {
+            
             throw new CustomUserMessageAuthenticationException('Username non valide');
         }
 

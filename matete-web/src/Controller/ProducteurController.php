@@ -2,12 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Lieu;
 use App\Entity\Producteur;
-use App\Form\ProducteurType;
-use App\Repository\AnnonceRepository;
-use App\Repository\LieuRepository;
 use App\Repository\ProducteurRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,31 +23,44 @@ class ProducteurController extends AbstractController
     }
 
     #[Route('/new', name: 'producteur_new', methods: ['GET','POST'])]
-    public function new(Request $request, LieuRepository $lieuRepository, AnnonceRepository $annonceRepository, UserPasswordEncoderInterface $userPass): Response
+    public function new(Request $request,UserPasswordEncoderInterface $userPass, ProducteurRepository $producteurRepository): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
 
         $producteur = new Producteur();
+        $userProd = $producteurRepository->findOneByMail($request->request->get('mail'));
 
-        if ($request->request->get('pass') == $request->request->get('passConf')) {
-            $passHash = ($userPass->encodePassword($producteur, $request->request->get('pass')));
-            $producteur->setMdp($passHash);
+        if (!$userProd) {
+            if ($request->request->get('pass') == $request->request->get('passConf')) {
+                $passHash = ($userPass->encodePassword($producteur, $request->request->get('pass')));
+                $producteur->setMdp($passHash);
 
-            $producteur->setNom($request->request->get('nom'));
-            $producteur->setPrenom($request->request->get('prenom'));
-            $producteur->setTel($request->request->get('tel'));
-            $producteur->setMail($request->request->get('mail'));
-        } else {
+                $producteur->setNom($request->request->get('nom'));
+                $producteur->setPrenom($request->request->get('prenom'));
+                $producteur->setTel($request->request->get('tel'));
+                $producteur->setMail($request->request->get('mail'));
+
+                $entityManager->persist($producteur);
+                $entityManager->flush();
+                
+                return $this->redirectToRoute("login_security");
+            } else {
+                $this->addFlash(
+                    'alert',
+                    "Vos mots de passe ne sont pas identique !"
+                );
+
+                return $this->redirectToRoute("register_security");
+
+            }
+        }  else {
             $this->addFlash(
                 'alert',
-                "Vos mots de passe ne sont pas identique !"
+                "L'adresse mail est déja utilisé !"
             );
-        }
+            return $this->redirectToRoute("register_security");
 
-        $entityManager->persist($producteur);
-        $entityManager->flush();
-        
-        return $this->redirectToRoute("panel_prod");
+        }
     }
 
     #[Route('/{id}', name: 'producteur_show', methods: ['GET'])]
@@ -125,15 +135,20 @@ class ProducteurController extends AbstractController
         return $this->redirectToRoute("main_page");
     }
 
-    #[Route('/{id}', name: 'producteur_delete', methods: ['POST'])]
-    public function delete(Request $request, Producteur $producteur): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$producteur->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($producteur);
-            $entityManager->flush();
-        }
+    #[Route('/{id}/delete', name: 'producteur_delete')]
+    public function delete(Request $request, Producteur $producteur, EntityManagerInterface $manager): Response
+    {   
+        $manager->remove($producteur);
+        $manager->flush();
 
-        return $this->redirectToRoute('producteur_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/confirmationSupression/{id}', name: 'producteur_confDelete', methods: ['GET'])]
+    public function confirmationDelete(Producteur $producteur): Response
+    {
+        return $this->render('producteur/_confDelete_form.html.twig', [
+            'producteur' => $producteur,
+        ]);
+    }
+
 }

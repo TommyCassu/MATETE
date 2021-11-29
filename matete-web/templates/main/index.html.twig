@@ -4,7 +4,14 @@
 
 {% block body %}
 
-  
+
+    <style>
+          .shadow{
+            box-shadow: 6px -1px 91px 15px rgba(110,110,110,0.75);
+            -webkit-box-shadow: 6px -1px 91px 15px rgba(110,110,110,0.75);
+            -moz-box-shadow: 6px -1px 91px 15px rgba(110,110,110,0.75);
+          }
+    </style>  
 
   <script>
     function initMap() {
@@ -41,6 +48,9 @@
       <div id="map" class="z-20 w-full h-full"></div>
     </div>
 
+
+    
+
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5t3C0OHeTuknC62DdKqOeqNPhMAhdITU&callback=initMap&libraries=&v=weekly"
       async>
@@ -55,4 +65,8 @@
     -webkit-animation-iteration-count: infinite;
   }
 </style>
+
+
+
+
 {% endblock %}

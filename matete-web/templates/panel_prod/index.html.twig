@@ -3,6 +3,7 @@
 {% block title %}Hello MainController!{% endblock %}
 
 {% block body %}
+{% include "include/maps.html.twig" %}
       {# Style panel producteur gauche #}
       <style>
       .shadow{
@@ -12,39 +13,6 @@
       }
     </style>
 
-     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-        #info{
-            font-family: 'Bebas Neue', cursive;
-        }
-    </style> 
-
-
-  <script>
-    function initMap() {
-    const lycée = { lat: 42.69276266087135, lng: 2.909845647650987 };
-
-      const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 15,
-        center: lycée,
-        //permet de cacher les boutons "Satellite" et "Plan"
-        mapTypeControl: false,
-        mapTypeControlOptions: {
-            style: google.maps.MapTypeControlStyle.VERTICAL_BAR,
-            position: google.maps.ControlPosition.TOP_RIGHT
-    },
-      });
-      
-
-      {% for liste in listeAnnonces %}
-
-        var marker = new google.maps.Marker({
-          position: { lat: {{ liste.cooX }} , lng: {{liste.cooY}} },
-          map: map,
-        });
-      {% endfor %}
-    }
-  </script>
     
     <div>
       {# Bouton panier #}
@@ -62,7 +30,7 @@
     
     
 
-    {# "Pop-up" de gauche #}
+    {# Panel de gauche #}
     <div class="z-30 w-4/12 h-screen  shadow mx-auto rounded-2xl bg-gray-50 absolute">
       
         <div class="z-20 flex ml-8 ">
@@ -130,6 +98,21 @@
         </div>  
           {# Ligne Séparation Info / Listes des annonces#}
             <div class="z-30 w-80 h-px  bg-black relative mx-auto"></div>
+
+          {# Tableau annonce #}
+          <div class="border borger-gray-500">
+            <table class="">
+              {% for annonce in tableauAnnonce %}
+                <tr>
+                  <td>
+                  {{ annonce.libelle }}
+                  
+                  {{ annonce.id }}
+                  </td>
+                </tr>
+              {% endfor %}  
+            </table>
+          </div>
     </div>
 
 

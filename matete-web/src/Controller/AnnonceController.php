@@ -73,7 +73,7 @@ class AnnonceController extends AbstractController
             $entityManager->persist($annonce);
             $entityManager->flush();
 
-            return $this->redirectToRoute('annonce_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('main_page');
         }
 
         return $this->render('annonce/new.html.twig', [

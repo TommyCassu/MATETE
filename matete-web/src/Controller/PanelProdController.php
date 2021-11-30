@@ -17,8 +17,10 @@ class PanelProdController extends AbstractController
     public function index(ProducteurRepository $producteurRepository, AnnonceRepository $annonceRepository, LieuRepository $lieuRepository): Response
     {
         $lieux = $lieuRepository->findAll();
+        $producteur = $producteurRepository->find($this->getUser());
 
 
+        // Afficher les points sur la carte
         $listeAnnonces = [];
         foreach ($lieux as $lieu) {
             foreach ($lieu->getAnnonce() as $annonce) {
@@ -34,8 +36,11 @@ class PanelProdController extends AbstractController
             }
         }
 
+        
+
         return $this->render('panel_prod/index.html.twig', [
             'listeAnnonces' => $listeAnnonces,
+            'tableauAnnonce' => $listeDesAnnonces,
         ]);
     }
 }

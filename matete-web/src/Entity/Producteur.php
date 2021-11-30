@@ -57,12 +57,12 @@ class Producteur implements UserInterface
     private $roles = [];
 
     /**
-     * @ORM\ManyToMany(targetEntity=Lieu::class, mappedBy="Producteur")
+     * @ORM\ManyToMany(targetEntity=Lieu::class, mappedBy="Producteur", cascade={"persist", "remove"})
      */
     private $lieux;
 
     /**
-     * @ORM\OneToMany(targetEntity=Annonce::class, mappedBy="producteur")
+     * @ORM\OneToMany(targetEntity=Annonce::class, mappedBy="producteur", cascade={"persist", "remove"})
      */
     private $Annonce;
 

@@ -34,13 +34,21 @@ class AnnonceController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         
         $annonce = new Annonce();
-        $lieu = new Lieu();
+        
         
         $lieux = $producteurRepository->find($this->getUser());
-        foreach ($lieux->getLieux() as $l) {
-          dump($l);  
+        $listelieux = [];
+
+        foreach ($lieux->getLieux() as $lieu) {
+            $nom = $lieu->getNom();
+            $id = $lieu->getId();
+                
+                $listelieux[] = array(
+                    'nom' => $nom,
+                    'id' => $id,
+                );
         }
-        dump($lieux);
+        
             
         if ($request->request->get('inscription') != NULL ) {
             $creneauxDebut = new DateTimeImmutable($request->request->get('creneauxDebut'));
@@ -49,11 +57,7 @@ class AnnonceController extends AbstractController
             $categorie = $categorieRepository->find($request->request->get('categorie'));
             $producteur = $producteurRepository->find($this->getUser());
 
-            $coordonne = explode(',', $request->request->get('lieu'));
-            $lieu->setCooX($coordonne[0]);
-            $lieu->setCooY($coordonne[1]);
-            $lieu->setNom($request->request->get('lieuNom'));
-            $lieu->setDescLieu($request->request->get('lieuDescription'));
+            
 
 
             $annonce->setCreneauxDebut($creneauxDebut);
@@ -64,7 +68,6 @@ class AnnonceController extends AbstractController
             $annonce->setCategorie($categorie);
             $annonce->setStatus('PasEnLigne');
 
-            $lieu->addAnnonce($annonce);
             $producteur->addAnnonce($annonce);
 
             $entityManager->persist($annonce);
@@ -75,6 +78,7 @@ class AnnonceController extends AbstractController
 
         return $this->render('annonce/new.html.twig', [
             'categories' => $categorieRepository->findAll(),
+            'lieux' => $listelieux,
         ]);
     }
 

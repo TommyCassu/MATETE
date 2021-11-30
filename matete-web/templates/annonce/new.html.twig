@@ -76,11 +76,11 @@
                     <div class="flex justify-centrer mx-auto">
                         {# Zone de select du lieu #}
                         <div class="mt-5 w-5/12">
-                            <label for="Mail">Lieu :</label><br>
-                            <select name="categorie" id="categorie" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none">
+                            <label for="lieu">Lieu :</label><br>
+                            <select name="leslieux" id="leslieux" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none">
                                 <option value="" disabled selected >Selectionner un lieu</option>
-                                {% for categorie in categories %}
-                                    <option value="{{ categorie.id }}">{{ categorie.libelle }}</option>
+                                {% for unlieu in lieux %}
+                                    <option value="{{ unlieu.id }}">{{ unlieu.nom }}</option>
                                 {% endfor %}
                             </select>
                         </div>

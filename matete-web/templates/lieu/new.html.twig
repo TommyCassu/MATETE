@@ -1,11 +1,69 @@
-{% extends 'base.html.twig' %}
+ {% extends 'base.html.twig' %}
 
-{% block title %}New Lieu{% endblock %}
+{% block title %}New Annonce{% endblock %}
+
+
 
 {% block body %}
-    <h1>Create new Lieu</h1>
 
-    {{ include('lieu/_form.html.twig') }}
+ <form method="POST" action="{{ path('lieu_new') }}">
 
-    <a href="{{ path('lieu_index') }}">back to list</a>
+    <div class="absolute w-screen h-screen flex flex-col">
+            {# Logo Matete #}
+            <div class="flex justify-center m-16" >
+                <img class="w-3/12 h-3/12" src="{{ asset('image/logotexte.png') }}">
+            </div>
+            {# Formulaire de connexion #}
+            <div class="px-10 p-4 shadow-2xl mx-auto rounded-2xl bg-white">
+                <div class="">
+                    {#  #}
+                    <div class="flex justify-center text-4xl font-extrabold">
+                        <h1>Créer un Lieu </h1>
+                    </div>
+                    {# Ligne N°1 #}
+                    <div class="flex justify-centrer mx-auto">
+                        {# Zone de saisie Créneaux début #}
+                        <div class="mt-5 w-5/12">
+                            <label for="pass">Coordonnées X :</label>
+                            <input type="text" id="CooX" name="CooX" placeholder="Entrez une coordonnées X" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " required>
+                        </div>
+                        <div class="mt-5 w-2/12 ">
+                        </div>
+                        {# Zone de saisie Créneaux Fin #}    
+                        <div class="mt-5 w-5/12 ">
+                            <label for="pass">Coordonnées Y :</label>
+                            <input type="text" id="CooY" name="CooY" placeholder="Entrez une coordonées Y" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " required>
+                        </div>
+                    </div>
+                    {# Ligne N°2 #}
+                    <div class="flex justify-centrer mx-auto">
+                        {# Zone de saisie Libellé produit #}
+                        <div class="mt-5 w-5/12">
+                            <label for="Mail">Nom de l'annonce :</label><br>
+                            <input type="text" id="Nomlieu" name="Nomlieu" placeholder="Entrez un Nom" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " required>
+                        </div>
+                        <div class="mt-5 w-2/12 ">
+                        </div>
+                        {# Zone de saisie Prix Unitaire #}    
+                        <div class="mt-5 w-5/12 ">
+                            <label for="Mail">Description du lieu :</label><br>
+                            <input type="text" id="Desclieu" name="Desclieu" placeholder="Entrez une Description" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " required>
+                        </div>
+                    </div>
+                    </div>
+
+                    {# Boutons de Ajout d'annonce #}
+                    <div class="mt-5 flex justify-center">
+                        <input type="submit" id="sendLieu" name="sendLieu" value="Créer un lieu" class="w-5/12 p-2.5  bg-yellow-300 rounded-lg">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token('log_form') }}">
+                </div>
+            </div>
+        </div> 
+        </div>
+ </form>
+   {# Image de fond #}
+ <div class="h-screen w-screen bg-no-repeat bg-cover" style="background-image:url('{{ asset('image/Carte.png') }}')"></div>
+
+ {% include "include/retour.html.twig" %}
+
 {% endblock %}

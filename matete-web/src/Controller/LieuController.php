@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Lieu;
 use App\Form\LieuType;
 use App\Repository\LieuRepository;
+use App\Repository\ProducteurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,24 +23,30 @@ class LieuController extends AbstractController
     }
 
     #[Route('/new', name: 'lieu_new', methods: ['GET','POST'])]
-    public function new(Request $request): Response
+    public function new(Request $request, ProducteurRepository $producteurRepository): Response
     {
+        $entityManager = $this->getDoctrine()->getManager();
         $lieu = new Lieu();
-        $form = $this->createForm(LieuType::class, $lieu);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+        if ($request->request->get('sendLieu') != NULL ) {
+            $producteur = $producteurRepository->find($this->getUser());
+            $coordoneeX = $request->request->get('CooX');
+            $coordoneeY = $request->request->get('CooY');
+        // $coordonne = explode(',', $request->request->get('lieu'));
+            $lieu->setCooX($coordoneeX);
+            $lieu->setCooY($coordoneeY);
+            $lieu->setNom($request->request->get('Nomlieu'));
+            $lieu->setDescLieu($request->request->get('Desclieu'));
+            $lieu->addProducteur($producteur);
+
             $entityManager->persist($lieu);
             $entityManager->flush();
 
-            return $this->redirectToRoute('lieu_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('main_page');
         }
 
-        return $this->renderForm('lieu/new.html.twig', [
-            'lieu' => $lieu,
-            'form' => $form,
-        ]);
+        return $this->render('lieu/new.html.twig');
+        
     }
 
     #[Route('/{id}', name: 'lieu_show', methods: ['GET'])]

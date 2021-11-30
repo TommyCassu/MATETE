@@ -22,19 +22,19 @@ class MainController extends AbstractController
 
 
         $listeAnnonces = [];
-        foreach ($lieux as $lieu) {
-            foreach ($lieu->getAnnonce() as $annonce) {
-                $name = $annonce->getNom();
-                $cooX = $annonce->getCooX();
-                $cooY = $annonce->getCooY();
+        // foreach ($lieux as $lieu) {
+        //     foreach ($lieu->getAnnonce() as $annonce) {
+        //         $name = $annonce->getNom();
+        //         $cooX = $annonce->getCooX();
+        //         $cooY = $annonce->getCooY();
                 
-                $listeAnnonces[] = array(
-                    'name' => $name,
-                    'cooX'=> $cooX,
-                    'cooY' => $cooY
-                );
-            }
-        }
+        //         $listeAnnonces[] = array(
+        //             'name' => $name,
+        //             'cooX'=> $cooX,
+        //             'cooY' => $cooY
+        //         );
+        //     }
+        // }
 
         // Afficher le tableau des annonces
         $listeDesAnnonces = [];

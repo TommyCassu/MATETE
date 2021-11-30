@@ -7,6 +7,7 @@ use App\Repository\ProducteurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -138,9 +139,15 @@ class ProducteurController extends AbstractController
     #[Route('/{id}/delete', name: 'producteur_delete')]
     public function delete(Request $request, Producteur $producteur, EntityManagerInterface $manager): Response
     {   
-        dd($this->get("session"));
         $manager->remove($producteur);
         $manager->flush();
+
+        $session = new Session();
+        $session->invalidate();
+
+        $this->addFlash(
+            'msg',
+            "Utilisateur supprimé !!");
 
         return $this->redirectToRoute("main_page");
 

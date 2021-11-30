@@ -107,11 +107,17 @@
             {# Ligne des Bouton Ajout Annonce et Déconnexion #}
               <div class="flex"> 
                 <div>
-                  {# Bouton pour ajouter #}
+                  {# Bouton pour ajouter un lieu #}
+                  <a href="{{ path('lieu_new') }}">
+                    <button class="z-50 bg-yellow-200 w-2/6 h-16  absolute left-64 bottom-4  rounded-2xl border-yellow-900 text-lg font-sans font-bold " onclick="{{ path('lieu_new') }}"><i class="">Ajouter un Lieu</i></button>
+                  </a>
+                </div> 
+                <div>
+                  {# Bouton pour ajouter une annonce #}
                   <a href="{{ path('annonce_new') }}">
                     <button class="z-50 bg-yellow-200 w-2/6 h-16  absolute left-4 bottom-4  rounded-2xl border-yellow-900 text-lg font-sans font-bold " onclick="{{ path('annonce_new') }}"><i class="">Ajouter une Annonce</i></button>
                   </a>
-                </div> 
+                </div>
 
                 <div>
                   {# Bouton pour déconnecter #}

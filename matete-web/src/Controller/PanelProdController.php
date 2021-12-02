@@ -16,26 +16,31 @@ class PanelProdController extends AbstractController
     #[Route('/panel/prod', name: 'panel_prod')]
     public function index(ProducteurRepository $producteurRepository, AnnonceRepository $annonceRepository, LieuRepository $lieuRepository): Response
     {
-        $lieux = $lieuRepository->findAll();
+        // $lieux = $lieuRepository->findAll();
+        // $producteur = $producteurRepository->find($this->getUser());
 
 
-        $listeAnnonces = [];
-        foreach ($lieux as $lieu) {
-            foreach ($lieu->getAnnonce() as $annonce) {
-                $name = $lieu->getNom();
-                $cooX = $lieu->getCooX();
-                $cooY = $lieu->getCooY();
+        // // Afficher les points sur la carte
+        // $listeAnnonces = [];
+        // foreach ($lieux as $lieu) {
+        //     foreach ($lieu->getAnnonce() as $annonce) {
+        //         $name = $lieu->getNom();
+        //         $cooX = $lieu->getCooX();
+        //         $cooY = $lieu->getCooY();
                 
-                $listeAnnonces[] = array(
-                    'name' => $name,
-                    'cooX'=> $cooX,
-                    'cooY' => $cooY
-                );
-            }
-        }
+        //         $listeAnnonces[] = array(
+        //             'name' => $name,
+        //             'cooX'=> $cooX,
+        //             'cooY' => $cooY
+        //         );
+        //     }
+        // }
 
-        return $this->render('panel_prod/index.html.twig', [
-            'listeAnnonces' => $listeAnnonces,
-        ]);
+        
+
+        // return $this->render('panel_prod/index.html.twig', [
+        //     'listeAnnonces' => $listeAnnonces,
+        //     'tableauAnnonce' => $listeDesAnnonces,
+        // ]);
     }
 }

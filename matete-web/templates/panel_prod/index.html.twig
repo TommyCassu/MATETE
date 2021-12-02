@@ -99,19 +99,43 @@
           {# Ligne Séparation Info / Listes des annonces#}
             <div class="z-30 w-80 h-px  bg-black relative mx-auto"></div>
 
-          {# Tableau annonce #}
-          <div class="border borger-gray-500">
-            <table class="">
-              {% for annonce in tableauAnnonce %}
+            <!-- {# Tableau annonce #}
+            <div class="border borger-gray-500">
+              <table class="">
+                {% for annonce in tableauAnnonce %}
+                  <tr>
+                    <td>
+                    {{ annonce.libelle }}
+                    </td>
+                  </tr>
+                {% endfor %}
+              </table> -->
+
+              <table width="100%">
                 <tr>
-                  <td>
-                  {{ annonce.libelle }}
-                  
-                  {{ annonce.id }}
-                  </td>
+                 <td>Nom</td>
+                 <td colspan="2">Date</td>
+                 <td>Statut</td>
+                 <td>Name 4</td>
                 </tr>
-              {% endfor %}  
-            </table>
+                {% for annonce in tableauAnnonce %}
+                <tr>
+                 <td rowspan="3">{{ annonce.libelle}}</td>
+                 <td>{{ annonce.cDebut | date('d/m H:i') }}</td>
+                 <td rowspan="3">
+                   {% if annonce.status == "pasEnLigne" %}
+                    <i class="fas fa-circle"></i>
+                   {% else %}
+                    <i class="fas fa-circle"></i>
+                 {% end if %}
+                </td>
+                </tr>
+               
+                <tr>
+                  <td>{{ annonce.cFin | date('d/m H:i') }}</td>
+                </tr>
+                {% endfor %}
+               </table>
           </div>
     </div>
 

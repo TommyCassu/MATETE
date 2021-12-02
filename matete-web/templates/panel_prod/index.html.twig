@@ -13,6 +13,15 @@
       }
     </style>
 
+    {# Pastille de statut #}
+    <style>
+      .statutvert{
+        color:green;
+      }
+      .statutrouge{
+        color:red;
+      }
+    </style>
     
     <div>
       {# Bouton panier #}
@@ -114,25 +123,28 @@
               <table width="100%">
                 <tr>
                  <td>Nom</td>
-                 <td colspan="2">Date</td>
+                 <td colspan="1">Date</td>
                  <td>Statut</td>
-                 <td>Name 4</td>
+                 <td>Détail</td>
                 </tr>
                 {% for annonce in tableauAnnonce %}
                 <tr>
-                 <td rowspan="3">{{ annonce.libelle}}</td>
-                 <td>{{ annonce.cDebut | date('d/m H:i') }}</td>
-                 <td rowspan="3">
+                 <td rowspan="2" class="border border-yellow-900">{{ annonce.libelle}}</td>
+                 <td class="border border-yellow-900">{{ annonce.cDebut | date('d/m H:i') }}</td>
+                 <td rowspan="2" class="border border-yellow-900 w-2/12">
                    {% if annonce.status == "pasEnLigne" %}
-                    <i class="fas fa-circle"></i>
+                    <i class="fas fa-circle statutvert "  ></i>
                    {% else %}
-                    <i class="fas fa-circle"></i>
+                    <i class="fas fa-circle statutrouge">Hors ligne</i>
                  {% endif %}
+                </td>
+                <td  rowspan="2" class="border border-yellow-900">
+                  <button name="detailAnnonce" class="flex bg-yellow-300 mx-auto p-2 w-4/6 rounded-lg " id="detailAnnonce"><i class="flex mx-auto">Détail</i></button>
                 </td>
                 </tr>
                
                 <tr>
-                  <td>{{ annonce.cFin | date('d/m H:i') }}</td>
+                  <td class="border border-yellow-900">{{ annonce.cFin | date('d/m H:i') }}</td>
                 </tr>
                 {% endfor %}
                </table>

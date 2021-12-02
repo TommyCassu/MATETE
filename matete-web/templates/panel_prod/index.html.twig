@@ -13,6 +13,18 @@
       }
     </style>
 
+
+    <style>
+      .shadoww{
+        -webkit-box-shadow: 1px 0px 15px 11px rgba(0,0,0,0.2); 
+box-shadow: 1px 0px 15px 11px rgba(0,0,0,0.2);
+      }
+      
+    </style>
+
+
+
+
     {# Pastille de statut #}
     <style>
       .statutvert{
@@ -20,6 +32,7 @@
       }
       .statutrouge{
         color:red;
+        
       }
     </style>
     
@@ -106,48 +119,57 @@
             
         </div>  
           {# Ligne Séparation Info / Listes des annonces#}
-            <div class="z-30 w-80 h-px  bg-black relative mx-auto"></div>
+            <div class="z-30 w-80 h-px  bg-black relative mx-auto  mb-2 "></div>
 
-            <!-- {# Tableau annonce #}
-            <div class="border borger-gray-500">
-              <table class="">
-                {% for annonce in tableauAnnonce %}
-                  <tr>
-                    <td>
-                    {{ annonce.libelle }}
-                    </td>
-                  </tr>
-                {% endfor %}
-              </table> -->
-
-              <table width="100%">
-                <tr>
-                 <td>Nom</td>
-                 <td colspan="1">Date</td>
-                 <td>Statut</td>
-                 <td>Détail</td>
-                </tr>
-                {% for annonce in tableauAnnonce %}
-                <tr>
-                 <td rowspan="2" class="border border-yellow-900">{{ annonce.libelle}}</td>
-                 <td class="border border-yellow-900">{{ annonce.cDebut | date('d/m H:i') }}</td>
-                 <td rowspan="2" class="border border-yellow-900 w-2/12">
-                   {% if annonce.status == "pasEnLigne" %}
-                    <i class="fas fa-circle statutvert "  ></i>
-                   {% else %}
-                    <i class="fas fa-circle statutrouge">Hors ligne</i>
-                 {% endif %}
-                </td>
-                <td  rowspan="2" class="border border-yellow-900">
-                  <button name="detailAnnonce" class="flex bg-yellow-300 mx-auto p-2 w-4/6 rounded-lg " id="detailAnnonce"><i class="flex mx-auto">Détail</i></button>
-                </td>
-                </tr>
-               
-                <tr>
-                  <td class="border border-yellow-900">{{ annonce.cFin | date('d/m H:i') }}</td>
-                </tr>
-                {% endfor %}
-               </table>
+            {# Liste annonces #}
+            
+                <div  class="z-30 scroll relative mx-auto"><i class="flex justify-center text-3xl">Liste de vos annonces</i></div>
+                <div style="overflow-y:scroll; height:510px;">
+                  {% for annonce in tableauAnnonce %}
+                  {# Zone annonces #}
+                  <div  class="z-30 shadoww bg-yellow-200 w-5/6 h-32 mr-8 rounded-3xl mb-10 mt-6 ml-10">
+                      {# Libellé Produit#}
+                      <div class="flex inline">
+                        <div class="ml-12 mt-1 ">
+                          <div class="relative z-50 w-20 h-6 top-2 ml-8 mb-2 "><i class="text-2xl  " >{{ annonce.libelle}}</i></div>
+                          {# Catégorie Produit#}
+                          <div class="relative z-50 w-5/6 h-6 top-2 ml-8 "><i class="text-1xl">{{ annonce.categorie }}</i></div>
+                        </div>
+                          {# Zone quantite prix statut #} 
+                          <div class="relative z-40 bg-white w-3/6 h-16  rounded-full ml-20 top-3 mb-4 ">
+                            
+                              {# Zone Quantite Prix #}
+                              <div class="flex inline">
+                                <div>
+                                {# Quantite #}
+                                  <div class="relative z-50 w-5/6 h-6 top-2 ml-8 "><i >Quantité : {{ annonce.quantite}}</i></div>
+                                {# Prix #}
+                                  <div class="relative z-50 w-3/6 h-6 top-3 ml-8"><i >Prix : {{ annonce.prix}}</i></div>
+                                </div>
+                              {# Statut #}
+                                {% if annonce.status == "pasEnLigne" %}
+                                  <i class="z-40 fas fa-circle statutvert "  ></i>
+                                {% else %}
+                                  <i class="z-40 relative fas fa-circle statutrouge fa-2x ml-10 mt-4 bg-black border-2 border-black rounded-full "></i>
+                                {% endif %}
+                              </div>
+                          </div>
+                          
+                      </div> 
+                      {# Zones Bouton Detail et Dates#}
+                      <div class="flex inline ">
+                        {# Bouton Detail#}
+                        <a href="{{ path('annonce_edit',{'id':annonce.id}) }}" >
+                        <button name="detailAnnonce" class="flex bg-yellow-300  p-2 w-6/12 rounded-lg  ml-16 mr-16 " id="detailAnnonce" onclick="{{ path('annonce_edit',{'id':annonce.id}) }}"><i class="flex mx-auto">Détail</i></button></a>
+                        {# Zone Date début #}
+                        <div class="relative z-40 bg-white w-3/12 h-6  rounded-full ml-10 mr-4 top-3 "><i class="flex justify-center">{{ annonce.cDebut | date('d/m H:i') }}</i></div>
+                        {# Zone Date Fin #}
+                        <div class="relative z-40 bg-white w-3/12 h-6  rounded-full   top-3 "><i class="flex justify-center">{{ annonce.cDebut | date('d/m H:i') }}</i></div>
+                      </div>
+                      
+                  </div>
+                  {% endfor %}
+               </div>
           </div>
     </div>
 

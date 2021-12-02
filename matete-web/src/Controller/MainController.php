@@ -49,6 +49,7 @@ class MainController extends AbstractController
                 $status = $annonce->getStatus();
                 $dateMiseEnLigne = $annonce->getDateMiseEnLigne();
                 $id = $annonce->getId();
+                $categorie = $annonce->getCategorie();
                     
                     $listeDesAnnonces[] = array(
                         'id' => $id,
@@ -56,7 +57,10 @@ class MainController extends AbstractController
                         'cDebut' => $creneauxDebut,
                         'cFin' => $creneauxFin,
                         'status' => $status,
-                        'date' => $dateMiseEnLigne
+                        'date' => $dateMiseEnLigne,
+                        'quantite' => $quantite,
+                        'prix' => $prixUnitaire,
+                        'categorie' => $categorie
                     );
             }
 

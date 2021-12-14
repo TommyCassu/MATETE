@@ -16,7 +16,7 @@ Pour pouvoir afficher une carte et ainsi permettre la localisation des annonces 
 
 #### Application web : 
 
-Pour pouvoir afficher une carte et ainsi permettre la localisation des annonces ainsi que le placement des markers.Nous utilisons la librairie publique "[Google Map](https://developers.google.com/maps/documentation/javascript/overview)".
+Pour pouvoir afficher une carte et ainsi permettre la localisation des annonces ainsi que le placement des markers.Nous utilisons la librairie publique "[Google Map](https://developers.google.com/maps/documentation/javascript/overview)" disponible sur le site officiel de Google Map.
 
 ![](images/osmdesc1.png)
 ![](images/osmdesc2.png)

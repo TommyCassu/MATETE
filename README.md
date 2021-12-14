@@ -66,7 +66,7 @@ _Windows & Mac :_
 
 >Disponible sur le site officiel de [Symfony](https://symfony.com/download)
 
->PS : Plus d'informations sur l'installation sous linux en cas de soucis.
+>PS : Plus d'informations sur le site pour l'installation sous linux en cas de soucis.
 ### 5. Installer Composer 2.1.9
 _Linux & Windows :_
 

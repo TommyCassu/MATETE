@@ -7,8 +7,11 @@ use App\Entity\Lieu;
 use App\Repository\AnnonceRepository;
 use App\Repository\LieuRepository;
 use App\Repository\ProducteurRepository;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\MakerBundle\Str;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
@@ -16,25 +19,41 @@ class MainController extends AbstractController
     #[Route('/', name: 'main_page')]
     public function index(AnnonceRepository $annonceRepository, LieuRepository $lieuRepository, ProducteurRepository $producteurRepository): Response
     {
+        $session = new Session();
+        $session->start();
+
+        dump($session->get('panier'));
+
         $user = $this->getUser();
         $lieux = $lieuRepository->findAll();
-
 
         // MAPS
         $listeLieux = [];
         foreach ($lieux as $lieu) {
-                $name = $lieu->getNom();
-                $cooX = $lieu->getCooX();
-                $cooY = $lieu->getCooY();
-                
-                $listeLieux[] = array(
-                    'name' => $name,
-                    'cooX'=> $cooX,
-                    'cooY' => $cooY
+            $name = $lieu->getNom();
+            $cooX = $lieu->getCooX();
+            $cooY = $lieu->getCooY();
+            
+            $annonceListe = [];
+            foreach ($lieu->getAnnonce() as $annonce) {
+                $libelle = $annonce->getLibelleProduit();
+                $id = $annonce->getId();
+
+                $annonceListe[] = array(
+                    'libelle' => $libelle,
+                    'id' => $id,
                 );
+            }
+            
+            $listeLieux[] = array(
+                'name' => $name,
+                'cooX'=> $cooX,
+                'cooY' => $cooY,
+                'annonce' => $annonceListe,
+            );
+                
         }
-        dump($lieux);
-        dump($listeLieux);
+
 
         if ($user != NULL) {
             $producteur = $producteurRepository->find($this->getUser());
@@ -63,11 +82,7 @@ class MainController extends AbstractController
                         'categorie' => $categorie
                     );
             }
-
-        dump($listeDesAnnonces);
         }
-
-        
 
         if($user == null){
             return $this->render('main/index.html.twig', [
@@ -80,5 +95,50 @@ class MainController extends AbstractController
 
             ]);
         }
+    }
+
+    #[Route('/ajout/{id}', name: 'panierAjout')]
+    public function ajoutPanier(AnnonceRepository $annonceRepository, String $id): Response
+    {
+        $annonce = $annonceRepository->findById($id);
+        $session = new Session();
+        $session->start();
+
+        $panier = [];
+        if ($session->get('panier') != NULL) {
+            foreach ($session->get('panier') as $p) {
+                array_push($panier, $p);
+            }
+        }
+        array_push($panier, $annonce[0]);
+        
+        $session->set('panier', $panier);
+        
+        $this->addFlash(
+            'alert',
+            "Item ajouter"
+        );
+        
+        return $this->redirectToRoute('main_page');
+    }
+
+    #[Route('/panier', name: 'panier_show')]
+    public function showPanier(): Response
+    {
+        $session = new Session();
+        $session->start();
+
+       return $this->render('main/panier.html.twig');
+    }
+
+    #[Route('/panier/clear', name: 'clearPanier')]
+    public function clearPanier(): Response
+    {
+        $session = new Session();
+        $session->start();
+
+        $session->clear();
+
+       return $this->redirectToRoute('main_page');
     }
 }

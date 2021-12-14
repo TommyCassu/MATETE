@@ -8,6 +8,7 @@ use App\Form\AnnonceType;
 use App\Repository\AnnonceRepository;
 use App\Repository\CategorieRepository;
 use App\Entity\Categorie;
+use App\Repository\LieuRepository;
 use App\Repository\ProducteurRepository;
 use DateTimeImmutable;
 use Producteur;
@@ -29,7 +30,7 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/new', name: 'annonce_new', methods: ['GET','POST'])]
-    public function new(Request $request, CategorieRepository $categorieRepository, ProducteurRepository $producteurRepository): Response
+    public function new(Request $request, CategorieRepository $categorieRepository, ProducteurRepository $producteurRepository, LieuRepository $lieuRepository): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
         
@@ -55,10 +56,8 @@ class AnnonceController extends AbstractController
             $creneauxFin = new DateTimeImmutable($request->request->get('creneauxFin'));
 
             $categorie = $categorieRepository->find($request->request->get('categorie'));
+            $lieu = $lieuRepository->find($request->request->get('leslieux'));
             $producteur = $producteurRepository->find($this->getUser());
-
-            
-
 
             $annonce->setCreneauxDebut($creneauxDebut);
             $annonce->setCreneauxFin($creneauxFin);
@@ -66,9 +65,11 @@ class AnnonceController extends AbstractController
             $annonce->setPrixUnitaire($request->request->get('prixUnitaire'));
             $annonce->setQuantite($request->request->get('quantite'));
             $annonce->setCategorie($categorie);
+            $annonce->setLieu($lieu);
             $annonce->setStatus('PasEnLigne');
 
             $producteur->addAnnonce($annonce);
+            
 
             $entityManager->persist($annonce);
             $entityManager->flush();

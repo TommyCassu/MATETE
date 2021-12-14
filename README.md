@@ -28,7 +28,7 @@ Pour pouvoir afficher une carte et ainsi permettre la localisation des annonces 
 ## Aperçu Application mobile
 ![Aperçu mobile](asset/screen/ApercuMobile.png)
 ## Aperçu Site web
-![Aperçu site](uc.png)
+![Aperçu site](asset/screen/apercusite.png)
 
 ## Installation
 ### 1. Clone le projet

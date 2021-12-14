@@ -77,6 +77,7 @@ $ sudo composer self-update
 
 ```shell
 $ git clone https://gitlab.com/RomainChardon/matete.git
+$ composer update
 ````
 
 ## Schéma d'Architecture Applicative

@@ -9,7 +9,14 @@ MATETE propose aux personnes travaillant dans le secteur de l'agriculture ou ses
  L'utilisateur lui pourra grâce à un système de géolocalisation visualiser les annonces disponible autour de lui.Il pourra aussi trier ces dites annonces grâce à un système de tag où il choisira quels légumes/fruits il souhaite acheté.Après avoir fini sa liste de courses il va pouvoir se rendre au lieu de vente et procéder à l'échange avec le producteur.
 
 ## Système de carte
+
+Application mobile :
+
 Pour pouvoir afficher une carte et ainsi permettre la localisation des annonces ainsi que le placement des markers.Nous utilisons la librairie publique "[Osmdroid](https://github.com/osmdroid/osmdroid)" disponible sur GitHUB.
+
+Application web : 
+
+Pour pouvoir afficher une carte et ainsi permettre la localisation des annonces ainsi que le placement des markers.Nous utilisons la librairie publique "[Google Map](https://developers.google.com/maps/documentation/javascript/overview)".
 
 ![](images/osmdesc1.png)
 ![](images/osmdesc2.png)

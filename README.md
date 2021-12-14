@@ -28,7 +28,7 @@ Pour pouvoir afficher une carte et ainsi permettre la localisation des annonces 
 ## Aperçu Application mobile
 ![Aperçu mobile](asset/screen/ApercuMobile.png)
 ## Aperçu Site web
-![Aperçu mobile](asset/screen/apercusite2.png)
+![Aperçu site](asset/screen/apercusite2.png)
 
 ## Installation
 ### 1. Clone le projet
@@ -79,6 +79,10 @@ $ sudo php -r "unlink('composer-setup.php');"
 # Si composer n'est pas à jour
 $ sudo composer self-update
 ```
+
+## Schéma d'Architecture Applicative
+![Architecture Applicative](asset/screen/architecture.png)
+
 # Documentation Technique :
 ### Documentation API
 - Découvrez la documentation de l'API (Swagger) à ce [Lien](gaga)

@@ -4,6 +4,7 @@
 
 {% block body %}
 {% include "include/maps.html.twig" %}
+{% include "include/filtre.html.twig" %}
       {# Style panel producteur gauche #}
       <style>
       .shadow{
@@ -19,6 +20,23 @@
         -webkit-box-shadow: 1px 0px 15px 11px rgba(0,0,0,0.2); 
 box-shadow: 1px 0px 15px 11px rgba(0,0,0,0.2);
       }
+
+      ::-webkit-scrollbar{
+width: 13px;
+height: 13px;
+}
+::-webkit-scrollbar-thumb{
+background: #B3AFB3;
+border-radius: 9px;
+}
+::-webkit-scrollbar-thumb:hover{
+background: #B3AFB3;
+}
+::-webkit-scrollbar-track{
+background: #FFFFFF;
+border-radius: 9px;
+box-shadow: inset 0px 0px 0px 0px #F0F0F0;
+}
       
     </style>
 
@@ -124,7 +142,7 @@ box-shadow: 1px 0px 15px 11px rgba(0,0,0,0.2);
             {# Liste annonces #}
             
                 <div  class="z-30 scroll relative mx-auto"><i class="flex justify-center text-3xl">Liste de vos annonces</i></div>
-                <div style="overflow-y:scroll; height:510px;">
+                <div  style="overflow-y:scroll; height:510px;">
                   {% for annonce in tableauAnnonce %}
                   {# Zone annonces #}
                   <div  class="z-30 shadoww bg-yellow-200 w-5/6 h-32 mr-8 rounded-3xl mb-10 mt-6 ml-10">

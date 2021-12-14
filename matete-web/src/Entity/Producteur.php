@@ -66,10 +66,6 @@ class Producteur implements UserInterface
      */
     private $Annonce;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Panier::class, mappedBy="Producteur", cascade={"persist", "remove"})
-     */
-    private $panier;
 
     public function __toString(): string
     {
@@ -265,26 +261,5 @@ class Producteur implements UserInterface
 
     }
 
-    public function getPanier(): ?Panier
-    {
-        return $this->panier;
-    }
-
-    public function setPanier(?Panier $panier): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($panier === null && $this->panier !== null) {
-            $this->panier->setProducteur(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($panier !== null && $panier->getProducteur() !== $this) {
-            $panier->setProducteur($this);
-        }
-
-        $this->panier = $panier;
-
-        return $this;
-    }
 }
 

@@ -23,25 +23,24 @@
       });
 
       {% for liste in listeLieux %}
-
-        var marker = new google.maps.Marker({
-          position: { lat: {{ liste.cooX }} , lng: {{liste.cooY}} },
-          map: map,
-        });
+          {% if liste.annonce != NULL %}
+            var marker = new google.maps.Marker({
+              position: { lat: {{ liste.cooX }} , lng: {{liste.cooY}} },
+              map: map,
+            }); 
+            attachSecretMessage(marker, '{% for annonce in liste.annonce %} {{ annonce.libelle }} <br> <button><a href="{{ path("panierAjout", {"id": annonce.id}) }}">Ajouter {{ annonce.libelle }}</a></button> <br>{% endfor %}');
+        {% endif %}
       {% endfor %}
+      
+      function attachSecretMessage(marker, secretMessage) {
+      const infowindow = new google.maps.InfoWindow({
+        content: secretMessage,
+      });
 
-      // map.addListener("center_changed", () => {
-      //   // 3 seconds after the center of the map has changed, pan back to the
-      //   // marker.
-      //   window.setTimeout(() => {
-      //     map.panTo(marker.getPosition() as google.maps.LatLng);
-      //   }, 3000);
-      // });
-
-      // marker.addListener("click", () => {
-      //   map.setZoom(8);
-      //   map.setCenter(marker.getPosition() as google.maps.LatLng);
-      // });
-
+      marker.addListener("click", () => {
+        infowindow.open(marker.get("map"), marker);
+      });
+}
+      
     }
   </script>

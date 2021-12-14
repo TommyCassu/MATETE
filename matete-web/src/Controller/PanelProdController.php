@@ -13,34 +13,9 @@ use App\Repository\ProducteurRepository;
 
 class PanelProdController extends AbstractController
 {
-    #[Route('/panel/prod', name: 'panel_prod')]
-    public function index(ProducteurRepository $producteurRepository, AnnonceRepository $annonceRepository, LieuRepository $lieuRepository): Response
+    #[Route('/panel/prod/panier', name: 'panel_prod_panier')]
+    public function index(): Response
     {
-        // $lieux = $lieuRepository->findAll();
-        // $producteur = $producteurRepository->find($this->getUser());
-
-
-        // // Afficher les points sur la carte
-        // $listeAnnonces = [];
-        // foreach ($lieux as $lieu) {
-        //     foreach ($lieu->getAnnonce() as $annonce) {
-        //         $name = $lieu->getNom();
-        //         $cooX = $lieu->getCooX();
-        //         $cooY = $lieu->getCooY();
-                
-        //         $listeAnnonces[] = array(
-        //             'name' => $name,
-        //             'cooX'=> $cooX,
-        //             'cooY' => $cooY
-        //         );
-        //     }
-        // }
-
         
-
-        // return $this->render('panel_prod/index.html.twig', [
-        //     'listeAnnonces' => $listeAnnonces,
-        //     'tableauAnnonce' => $listeDesAnnonces,
-        // ]);
     }
 }

@@ -10,11 +10,11 @@ MATETE propose aux personnes travaillant dans le secteur de l'agriculture ou ses
 
 ## Système de carte
 
-####Application mobile :
+#### Application mobile :
 
 Pour pouvoir afficher une carte et ainsi permettre la localisation des annonces ainsi que le placement des markers.Nous utilisons la librairie publique "[Osmdroid](https://github.com/osmdroid/osmdroid)" disponible sur GitHUB.
 
-####Application web : 
+#### Application web : 
 
 Pour pouvoir afficher une carte et ainsi permettre la localisation des annonces ainsi que le placement des markers.Nous utilisons la librairie publique "[Google Map](https://developers.google.com/maps/documentation/javascript/overview)".
 

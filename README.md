@@ -73,7 +73,6 @@ $ sudo composer self-update
 ```
 
 ## Installation
-### Clone le projet
 
 ```shell
 $ git clone https://gitlab.com/RomainChardon/matete.git

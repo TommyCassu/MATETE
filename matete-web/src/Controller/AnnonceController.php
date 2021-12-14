@@ -8,6 +8,7 @@ use App\Form\AnnonceType;
 use App\Repository\AnnonceRepository;
 use App\Repository\CategorieRepository;
 use App\Entity\Categorie;
+use App\Repository\LieuRepository;
 use App\Repository\ProducteurRepository;
 use DateTimeImmutable;
 use Producteur;
@@ -29,13 +30,12 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/new', name: 'annonce_new', methods: ['GET','POST'])]
-    public function new(Request $request, CategorieRepository $categorieRepository, ProducteurRepository $producteurRepository): Response
+    public function new(Request $request, CategorieRepository $categorieRepository, ProducteurRepository $producteurRepository, AnnonceRepository $annonceRepository): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
         
         $annonce = new Annonce();
-        
-        
+
         $lieux = $producteurRepository->find($this->getUser());
         $listelieux = [];
 
@@ -91,8 +91,24 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'annonce_edit', methods: ['GET','POST'])]
-    public function edit(Request $request, Annonce $annonce): Response
+    public function edit(Request $request, Annonce $annonce , CategorieRepository $categorieRepository , LieuRepository $lieuRepository , ProducteurRepository $producteurRepository): Response
     {
+        $categories = $categorieRepository->findById($request->request->get('categorie'));
+        
+        $lieux = $producteurRepository->find($this->getUser());
+        $listelieux = [];
+
+        foreach ($lieux->getLieux() as $lieu) {
+            $nom = $lieu->getNom();
+            $id = $lieu->getId();
+                
+                $listelieux[] = array(
+                    'nom' => $nom,
+                    'id' => $id,
+                );
+        }
+
+        dump($annonce);
         $form = $this->createForm(AnnonceType::class, $annonce);
         $form->handleRequest($request);
 
@@ -103,6 +119,8 @@ class AnnonceController extends AbstractController
         }
 
         return $this->renderForm('annonce/edit.html.twig', [
+            'categories' => $categorieRepository->findAll(),
+            'lieux' => $listelieux,
             'annonce' => $annonce,
             'form' => $form,
         ]);

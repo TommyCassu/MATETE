@@ -107,19 +107,8 @@
         </div>  
           {# Ligne Séparation Info / Listes des annonces#}
             <div class="z-30 w-80 h-px  bg-black relative mx-auto"></div>
-
-            <!-- {# Tableau annonce #}
-            <div class="border borger-gray-500">
-              <table class="">
-                {% for annonce in tableauAnnonce %}
-                  <tr>
-                    <td>
-                    {{ annonce.libelle }}
-                    </td>
-                  </tr>
-                {% endfor %}
-              </table> -->
-
+              
+              {# Tableau des annonces #}
               <table width="100%">
                 <tr>
                  <td>Nom</td>
@@ -138,8 +127,10 @@
                     <i class="fas fa-circle statutrouge">Hors ligne</i>
                  {% endif %}
                 </td>
-                <td  rowspan="2" class="border border-yellow-900">
-                  <button name="detailAnnonce" class="flex bg-yellow-300 mx-auto p-2 w-4/6 rounded-lg " id="detailAnnonce"><i class="flex mx-auto">Détail</i></button>
+                <td  rowspan="2" class="border border-yellow-900" >
+                  <a href="{{ path('annonce_edit',{'id':annonce.id}) }}">
+                    <button name="detailAnnonce" class="flex bg-yellow-300 mx-auto p-2 w-4/6 rounded-lg " id="detailAnnonce" onclick="{{ path('annonce_edit',{'id':annonce.id}) }}"><i class="flex mx-auto">Détail</i></button>
+                  </a>
                 </td>
                 </tr>
                

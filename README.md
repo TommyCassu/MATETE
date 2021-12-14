@@ -1,10 +1,10 @@
 ## Qu'est ce qu'est MATETE ?
 
-MATETE est une application mobile et un site web mettant en relation des producteurs de fruit et légume ou autres produit propres au secteur de l'agriculture avec des particuliers. Cependant MATETE ne gère pas les transactions entre les différents acteurs.
+MATETE est une application mobile et un site web mettant en relation des producteurs de fruits et légumes ou autres produits propres au secteur de l'agriculture avec des particuliers. Cependant MATETE ne gère pas les transactions entre les différents acteurs.
 
 ## Fonctionnement :
 #### Producteur :
-MATETE propose aux personnes travaillant dans le secteur de l'agriculture ou ses divers autres branches de mettre en ligne des annonces en indiquant des informations concernant le lieu de vente ainsi que ses coordonnés(Email et/ou numéro de téléphone).
+MATETE propose aux personnes travaillant dans le secteur de l'agriculture ou ses divers autres branches de mettre en ligne des annonces en indiquant des informations concernant le lieu de vente ainsi que ses coordonnées(Email et/ou numéro de téléphone).
 #### Utilisateur :
  L'utilisateur lui pourra grâce à un système de géolocalisation visualiser les annonces disponible autour de lui.Il pourra aussi trier ces dites annonces grâce à un système de tag où il choisira quels légumes/fruits il souhaite acheté.Après avoir fini sa liste de courses il va pouvoir se rendre au lieu de vente et procéder à l'échange avec le producteur.
 
@@ -22,22 +22,14 @@ Pour pouvoir afficher une carte et ainsi permettre la localisation des annonces 
 
 **Disponible sur le site officiel de Google Map.**
 
-![](images/osmdesc1.png)
-![](images/osmdesc2.png)
-
 ## Aperçu Application mobile
 ![Aperçu mobile](asset/screen/ApercuMobile.png)
 ## Aperçu Site web
 ![Aperçu site](asset/screen/apercusite2.png)
 
-## Installation
-### 1. Clone le projet
+## Pré-requis
 
-```shell
-$ git clone https://gitlab.com/RomainChardon/matete.git
-```` 
-
-### 2. Installer PHP 8.0.11
+### 1. Installer PHP 8.0.11
 <a name ="php"></a>
 _Linux :_
 ```shell
@@ -50,14 +42,14 @@ _Windows :_
 
 >Disponible sur le site officiel de [PHP](https://www.php.net/downloads)
 
-### 3. Installer MYSQL
+### 2. Installer MYSQL
 _Linux :_
 ```shell
 $ sudo apt update
 $ sudo apt-get install mysql-client
 ```
 
-### 4. Installer Symfony 5.3.9 & Symfony CLI
+### 3. Installer Symfony 5.3.9 & Symfony CLI
 _Linux :_
 ```shell
 $ sudo wget https://get.symfony.com/cli/installer -O - | bash
@@ -67,7 +59,7 @@ _Windows & Mac :_
 >Disponible sur le site officiel de [Symfony](https://symfony.com/download)
 
 >PS : Plus d'informations sur le site pour l'installation sous linux en cas de soucis.
-### 5. Installer Composer 2.1.9
+### 4. Installer Composer 2.1.9
 _Linux & Windows :_
 
 >Necessite d'[installer PHP](#php)
@@ -79,6 +71,13 @@ $ sudo php -r "unlink('composer-setup.php');"
 # Si composer n'est pas à jour
 $ sudo composer self-update
 ```
+
+## Installation
+### Clone le projet
+
+```shell
+$ git clone https://gitlab.com/RomainChardon/matete.git
+````
 
 ## Schéma d'Architecture Applicative
 ![Architecture Applicative](asset/screen/architecture.png)

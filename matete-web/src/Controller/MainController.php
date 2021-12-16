@@ -123,12 +123,20 @@ class MainController extends AbstractController
     }
 
     #[Route('/panier', name: 'panier_show')]
-    public function showPanier(): Response
+    public function showPanier(AnnonceRepository $annonceRepository): Response
     {
         $session = new Session();
         $session->start();
 
-       return $this->render('main/panier.html.twig');
+        $listePanier = [];
+        foreach ($session->get('panier') as $detailPanier) {
+            $annonce = $annonceRepository->findById($detailPanier->getId($detailPanier->getId()));
+            $lieuAnnonce = $annonce->getLieux();
+        }
+
+       return $this->render('main/panier.html.twig', [
+           'panier' => $session->get('panier'),
+       ]);
     }
 
     #[Route('/panier/clear', name: 'clearPanier')]

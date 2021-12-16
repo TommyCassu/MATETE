@@ -3,5 +3,14 @@
 {% block title %}Panier{% endblock %}
 
 {% block body %}
-    <a href="{{ path('clearPanier') }}">Clear</a>
+    <a href="{{ path('clearPanier') }}">Clear</a> <br>
+
+    {% for detailPanier in panier %}
+            {{ detailPanier.libelleProduit }}
+            {{ detailPanier.creneauxDebut | date() }}
+            {{ detailPanier.creneauxFin | date() }}
+            {{ detailPanier.prixUnitaire }}
+            {{dump(detailPanier.lieu.id)}}
+            <br>
+    {% endfor %}
 {% endblock %}

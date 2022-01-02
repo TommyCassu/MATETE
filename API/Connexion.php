@@ -5,7 +5,12 @@ require('Lieu.php');
 require('Producteur.php');
 class Connexion{
     private $bdd;
-
+    
+    /**
+     * __construct
+     * Constructeur de la classe Connexion (Définir les identifiants de connexion à la BDD)
+     * @return void
+     */
     function __construct(){
         try {
             $this->bdd = new PDO('mysql:host=localhost; dbname=matete; charset=utf8', "root", "Lurcat2020");
@@ -15,7 +20,12 @@ class Connexion{
         }
     }
 
-    //récupérer toute les annonces
+        
+    /**
+     * RecupererAnnonces
+     * Récupère les annonces ayant été postée les 30 derniers jours
+     * @return void
+     */
     function RecupererAnnonces(){
         
         $dateActuelle = new DateTime();

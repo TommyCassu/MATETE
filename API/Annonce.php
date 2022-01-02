@@ -14,7 +14,25 @@ class Annonce implements JsonSerializable {
     private $date_mise_en_ligne;
     private $lieu;
     private $categorie;
-
+    
+    /**
+     * __construct
+     * Constructeur de la table Annonce 
+     * @param  mixed $_id
+     * @param  mixed $lieu_id
+     * @param  mixed $categorie_id
+     * @param  mixed $producteur_id
+     * @param  mixed $_creneaux_debut
+     * @param  mixed $_creneaux_fin
+     * @param  mixed $_libelle_produit
+     * @param  mixed $_prix_unitaire
+     * @param  mixed $_quantite
+     * @param  mixed $_status
+     * @param  mixed $_date_mise_en_ligne
+     * @param  mixed $_lieu
+     * @param  mixed $_categorie
+     * @return void
+     */
     function __construct( $_id,$lieu_id,$categorie_id,$producteur_id, $_creneaux_debut,$_creneaux_fin,$_libelle_produit,$_prix_unitaire,$_quantite,$_status,$_date_mise_en_ligne,$_lieu,$_categorie)
     {
         $this->id = $_id;
@@ -31,7 +49,12 @@ class Annonce implements JsonSerializable {
         $this->lieu = $_lieu;
         $this->categorie = $_categorie;
     }
-
+    
+    /**
+     * jsonSerialize
+     * Permet de mettre les données au format JSON 
+     * @return void
+     */
     public function jsonSerialize (){
         return [
             "id" => $this->id,

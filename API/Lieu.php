@@ -15,8 +15,25 @@ class Lieu implements JsonSerializable {
         $this->descLieu = $_descLieu;
         $this->nom = $_nom;
     }
+
     function getId(){
-        return $_id;
+        return $this->_id;
+    }
+
+    function getCooX(){
+        return $this->_cooX;
+    }
+
+    function getCooY(){
+        return $this->_cooY;
+    }
+
+    function getdesclieu(){
+        return $this->_descLieu;
+    }
+
+    function getnom(){
+        return $this->_nom;
     }
 
     public function jsonSerialize (){

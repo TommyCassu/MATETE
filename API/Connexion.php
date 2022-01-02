@@ -8,7 +8,7 @@ class Connexion{
 
     function __construct(){
         try {
-            $this->bdd = new PDO('mysql:host=localhost; dbname=matete; charset=utf8', "root", "");
+            $this->bdd = new PDO('mysql:host=localhost; dbname=matete; charset=utf8', "root", "Lurcat2020");
             $this->bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -32,7 +32,7 @@ class Connexion{
         while ($row = $requete->fetch()) {
             $c = new Categorie($row['id'],$row['libelle']); 
             $l = new Lieu($row['id'],$row['coo_x'],$row['coo_y'],$row['desc_lieu'],$row['nom']);
-            array_push($annoncesPOO, new Annonce($row['id'],$row['creneaux_debut'],$row['creneaux_fin'],$row['libelle_produit'],$row['prix_unitaire'],$row['quantite'],$row['status'],$row['date_mise_en_ligne'],$l,$c));
+            array_push($annoncesPOO, new Annonce($row['id'],$row['lieu_id'],$row['categorie_id'],$row['producteur_id'],$row['creneaux_debut'],$row['creneaux_fin'],$row['libelle_produit'],$row['prix_unitaire'],$row['quantite'],$row['status'],$row['date_mise_en_ligne'],$l,$c));
         }
         return $annoncesPOO;
     }

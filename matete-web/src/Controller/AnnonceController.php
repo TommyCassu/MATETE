@@ -30,13 +30,12 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/new', name: 'annonce_new', methods: ['GET','POST'])]
-    public function new(Request $request, CategorieRepository $categorieRepository, ProducteurRepository $producteurRepository, LieuRepository $lieuRepository): Response
+    public function new(Request $request, CategorieRepository $categorieRepository, ProducteurRepository $producteurRepository, AnnonceRepository $annonceRepository, LieuRepository $lieuRepository): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
         
         $annonce = new Annonce();
-        
-        
+
         $lieux = $producteurRepository->find($this->getUser());
         $listelieux = [];
 
@@ -92,21 +91,70 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'annonce_edit', methods: ['GET','POST'])]
-    public function edit(Request $request, Annonce $annonce): Response
+    public function edit(Request $request, Annonce $annonce , CategorieRepository $categorieRepository , LieuRepository $lieuRepository , ProducteurRepository $producteurRepository): Response
     {
-        $form = $this->createForm(AnnonceType::class, $annonce);
-        $form->handleRequest($request);
+        $entityManager = $this->getDoctrine()->getManager();
+        $categories = $categorieRepository->findById($request->request->get('categorie'));
+        
+        
+        
+        $lieux = $producteurRepository->find($this->getUser());
+        $listelieux = [];
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('annonce_index', [], Response::HTTP_SEE_OTHER);
+        foreach ($lieux->getLieux() as $lieu) {
+            $nom = $lieu->getNom();
+            $id = $lieu->getId();
+                
+                $listelieux[] = array(
+                    'nom' => $nom,
+                    'id' => $id,
+                );
         }
 
+        //Edition libellé du produit
+        if ($request->request->get('libelleProd') != null) {
+            $annonce->setLibelleProduit($request->request->get('libelleProd'));
+        }
+
+        //Edition Prix unitaire
+        if ($request->request->get('prixUnitaire') != null) {
+            $annonce->setPrixUnitaire($request->request->get('prixUnitaire'));
+        }
+
+        //Edition quantité
+        if ($request->request->get('quantite') != null) {
+            $annonce->setQuantite($request->request->get('quantite'));
+        }
+
+        //Edition lieu
+        if ($request->request->get('lesLieux') != null) {
+            $annonce->setLieu($request->request->get('lesLieux'));
+        }
+
+        //Edition Créneaux Début
+        if ($request->request->get('cDebut') != null) {
+            $annonce->setCreneauxDebut($creneauxDebut = new DateTimeImmutable($request->request->get('cDebut')));
+        }
+
+        //Edition Créneaux Fin
+        if ($request->request->get('cFin') != null) {
+            $annonce->setCreneauxDebut($creneauxFin = new DateTimeImmutable($request->request->get('cFin')));
+        }
+
+        //Edition Catégorie
+        if ($request->request->get('categorie') != null) {
+            $annonce->setCategorie($request->request->get('categorie'));
+        }
+
+        $entityManager->persist($annonce);
+        $entityManager->flush();
+
         return $this->renderForm('annonce/edit.html.twig', [
+            'categories' => $categorieRepository->findAll(),
+            'lieux' => $listelieux,
             'annonce' => $annonce,
-            'form' => $form,
         ]);
+
     }
 
     #[Route('/{id}', name: 'annonce_delete', methods: ['POST'])]

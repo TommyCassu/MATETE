@@ -44,7 +44,9 @@
 
 
 {# Popup Accueil#}
-    <div id="popupMain" class="z-50 shadow bg-white w-4/6 h-5/6 top-0 right-0 absolute mr-80 mt-20 mr-8 rounded-2xl">
+    <div id="popupMain" class="z-50 shadow bg-white w-4/6 h-5/6 top-0 right-0 absolute mr-80 mt-20 mr-8 rounded-2xl"  
+      {% if cookies == true %}style="display: none;"{% endif %}>
+      
       <div class="z-10 absolute left-0 arondi" style="height: 150px; overflow: hidden;" ><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M-51.91,155.90 C213.85,138.09 -32.20,2.54 461.60,-13.29 L190.77,-108.28 L-14.18,-33.08 Z" style="stroke: none; fill: #fde68a;"></path></svg></div>
       
       {# Logo Matete #}

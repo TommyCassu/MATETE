@@ -98,9 +98,11 @@ class MainController extends AbstractController
     }
 
     #[Route('/ajout/{id}', name: 'panierAjout')]
-    public function ajoutPanier(AnnonceRepository $annonceRepository, String $id): Response
+    public function ajoutPanier(AnnonceRepository $annonceRepository, Annonce $annonce, LieuRepository $lieuRepository): Response
     {
-        $annonce = $annonceRepository->findById($id);
+        $annon = $annonce;
+        $idLieu = $annon->getLieu()->getId();
+        $lieu = $lieuRepository->findById($idLieu);
         $session = new Session();
         $session->start();
 
@@ -110,7 +112,10 @@ class MainController extends AbstractController
                 array_push($panier, $p);
             }
         }
-        array_push($panier, $annonce[0]);
+        array_push($panier, [
+            'annonce' => $annon,
+            'lieu' => $lieu[0],
+        ]);
         
         $session->set('panier', $panier);
         
@@ -128,11 +133,11 @@ class MainController extends AbstractController
         $session = new Session();
         $session->start();
 
-        $listePanier = [];
-        foreach ($session->get('panier') as $detailPanier) {
-            $annonce = $annonceRepository->findById($detailPanier->getId($detailPanier->getId()));
-            $lieuAnnonce = $annonce->getLieux();
-        }
+        // $listePanier = [];
+        // foreach ($session->get('panier') as $detailPanier) {
+        //     $annonce = $annonceRepository->findById($detailPanier->getId($detailPanier->getId()));
+        //     $lieuAnnonce = $annonce->getLieux();
+        // }
 
        return $this->render('main/panier.html.twig', [
            'panier' => $session->get('panier'),

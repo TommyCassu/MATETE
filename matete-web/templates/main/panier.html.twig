@@ -6,11 +6,13 @@
     <a href="{{ path('clearPanier') }}">Clear</a> <br>
 
     {% for detailPanier in panier %}
-            {{ detailPanier.libelleProduit }}
-            {{ detailPanier.creneauxDebut | date() }}
-            {{ detailPanier.creneauxFin | date() }}
-            {{ detailPanier.prixUnitaire }}
-            {{dump(detailPanier.lieu.id)}}
-            <br>
+        {{ detailPanier.annonce.libelleProduit }}
+        {{ detailPanier.annonce.creneauxDebut | date() }}
+        {{ detailPanier.annonce.creneauxFin | date() }}
+        {{ detailPanier.annonce.prixUnitaire }}
+        {{ detailPanier.lieu.cooX }}
+        {{ detailPanier.lieu.cooY }}
+        {{ detailPanier.lieu.nom }}
+        <br>
     {% endfor %}
 {% endblock %}

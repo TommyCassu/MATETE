@@ -7,9 +7,9 @@ use App\Entity\Lieu;
 use App\Repository\AnnonceRepository;
 use App\Repository\LieuRepository;
 use App\Repository\ProducteurRepository;
-use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Bundle\MakerBundle\Str;
+use Symfony\Component\HttpFoundation\Cookie as HttpFoundationCookie;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,10 +17,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
     #[Route('/', name: 'main_page')]
-    public function index(AnnonceRepository $annonceRepository, LieuRepository $lieuRepository, ProducteurRepository $producteurRepository): Response
+    public function index(Request $request, AnnonceRepository $annonceRepository, LieuRepository $lieuRepository, ProducteurRepository $producteurRepository): Response
     {
         $session = new Session();
         $session->start();
+
+        $response = new Response();
+        $cookie = new HttpFoundationCookie('visite', 'true' ,time() + (365 * 24 * 60 * 60));
+        $response->headers->setCookie($cookie);
+        $response->sendHeaders();
+        $cookie = $request->cookies->get('visite');
 
         dump($session->get('panier'));
 
@@ -87,14 +93,26 @@ class MainController extends AbstractController
         if($user == null){
             return $this->render('main/index.html.twig', [
                 'listeLieux' => $listeLieux,
+                'cookies' => $cookie,
             ]);
         }else{
             return $this->render('panel_prod/index.html.twig', [
                 'listeLieux' => $listeLieux,
+                'cookies' => $cookie,
                 'tableauAnnonce' => $listeDesAnnonces,
 
             ]);
         }
+    }
+
+    #[Route('/filtre', name: 'filtre')]
+    public function filtre(): Response
+    {
+        $session = new Session();
+        $session->start();
+
+        return $this->render('main/filtre.html.twig', [
+        ]);
     }
 
     #[Route('/ajout/{id}', name: 'panierAjout')]
@@ -132,12 +150,6 @@ class MainController extends AbstractController
     {
         $session = new Session();
         $session->start();
-
-        // $listePanier = [];
-        // foreach ($session->get('panier') as $detailPanier) {
-        //     $annonce = $annonceRepository->findById($detailPanier->getId($detailPanier->getId()));
-        //     $lieuAnnonce = $annonce->getLieux();
-        // }
 
        return $this->render('main/panier.html.twig', [
            'panier' => $session->get('panier'),

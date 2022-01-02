@@ -97,6 +97,16 @@ class MainController extends AbstractController
         }
     }
 
+    #[Route('/filtre', name: 'filtre')]
+    public function filtre(): Response
+    {
+        $session = new Session();
+        $session->start();
+
+        return $this->render('main/filtre.html.twig', [
+        ]);
+    }
+
     #[Route('/ajout/{id}', name: 'panierAjout')]
     public function ajoutPanier(AnnonceRepository $annonceRepository, Annonce $annonce, LieuRepository $lieuRepository): Response
     {
@@ -132,12 +142,6 @@ class MainController extends AbstractController
     {
         $session = new Session();
         $session->start();
-
-        // $listePanier = [];
-        // foreach ($session->get('panier') as $detailPanier) {
-        //     $annonce = $annonceRepository->findById($detailPanier->getId($detailPanier->getId()));
-        //     $lieuAnnonce = $annonce->getLieux();
-        // }
 
        return $this->render('main/panier.html.twig', [
            'panier' => $session->get('panier'),

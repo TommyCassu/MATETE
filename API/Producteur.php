@@ -6,16 +6,16 @@ class Producteur {
     private $prenom;
     private $tel;
     private $mail;
-    private $pass;
+    private $mdp;
 
-    function __construct( $_id, $_nom,$_prenom,$_tel,$_mail,$_pass)
+    function __construct( $_id, $_nom,$_prenom,$_tel,$_mail,$_mdp)
     {
         $this->id = $_id;
         $this->nom = $_nom;
         $this->prenom = $_prenom;
         $this->tel = $_tel;
         $this->mail = $_mail;
-        $this->pass = $_pass;
+        $this->mdp = $_mdp;
     }
 
     public function getId() {
@@ -33,7 +33,7 @@ class Producteur {
     public function getTel() {
         return $this->tel;
     }
-    redirect
+    
     public function getMail() {
         return $this->mail;
     }

@@ -18,13 +18,13 @@
                 <div class="">
                     {# Titre #}
                     <div class="flex justify-center text-4xl font-extrabold">
-                        <h1>Gestion de compte</h1>
+                        <h1>Détail de l'annonce</h1>
                     </div>
                     {# Ligne N°1 #}
                     <div class="flex justify-centrer mx-auto">
                         {# Zone de saisie Nom #}
                         <div class="mt-5 w-5/12">
-                            <label for="nom">Libellé du produit</label>
+                            <label for="libelleProd">Libellé du produit</label>
                             <input type="text" id="libelleProd" name="libelleProd" placeholder="{{annonce.libelleProduit}}" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none" >
                         </div>
                         {# Séparateur Milieu #}
@@ -32,36 +32,36 @@
                         {# Zone de saisie Ancien mot de passe #}    
                         <div class="mt-5 w-5/12 ">
                              <label for="cDebut">Créneaux début :</label><br>
-                            <input type="datetime-local" id="cDebut" name="cDebut" placeholder="Entrez un Créneaux" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " required>
+                            <input type="datetime-local" id="cDebut" name="cDebut" placeholder="Entrez un Créneaux" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " >
                         </div>
                     </div>
                     {# Ligne N°2 #}
                     <div class="flex justify-centrer mx-auto">
                         {# Zone de saisie Prénom #}
                         <div class="mt-5 w-5/12">
-                            <label for="pass">Prix Unitaire :</label>
-                            <input type="number" step="0.01" id="prixUnitaire" name="prixUnitaire" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " placeholder="Saisir le Prix/unité" required>
+                            <label for="prixUnitaire">Prix Unitaire :</label>
+                            <input type="number" step="0.01" id="prixUnitaire" name="prixUnitaire" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " placeholder="{{annonce.prixUnitaire}}" >
                         </div>
                         {# Séparateur Milieu #}
                         <div class="mt-5 w-2/12 "></div>
                         {# Zone de saisie Nouveau Mot de passe #}    
                         <div class="mt-5 w-5/12 ">
                             <label for="cFin">Créneaux fin :</label><br>
-                            <input type="datetime-local" id="cFin" name="cFin" placeholder="Entrez un Créneaux" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " required>
+                            <input type="datetime-local" id="cFin" name="cFin" placeholder="Entrez un Créneaux" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " >
                         </div>
                     </div>
                     {# Ligne N°3 #}
                     <div class="flex justify-centrer mx-auto">
                         {# Zone de saisie Téléphone #}
                         <div class="mt-5 w-5/12">
-                            <label for="Mail">Quantité :</label><br>
-                            <input type="number" step="1" id="quantite" name="quantite" placeholder="Entrez une Quantité" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none " required>   
+                            <label for="quantite">Quantité :</label><br>
+                            <input type="number" step="1" id="quantite" name="quantite" placeholder="{{annonce.quantite}}" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none ">   
                         </div>
                         {# Séparateur Milieu #}
                         <div class="mt-5 w-2/12 "></div>
                         {# Zone de saisie Confirmation du mot de passe #}    
                         <div class="mt-5 w-5/12 ">
-                           <label for="pass">Catégorie :</label><br>
+                           <label for="Catégorie">Catégorie :</label><br>
                             <select name="categorie" id="categorie" class="border border-gray-400 border-opacity-50 shadow-md rounded my-1.5 h-9 w-full p-1 focus:outline-none">
                                 <option value="" disabled selected >Choisir une catégorie</option>
                                 {% for categorie in categories %}
@@ -99,7 +99,7 @@
                         </div>
                     </div>
                     <div class="mt-10 w-full flex justify-end mr-9">
-                        <input type="submit" id="miseEnLigne" name="miseEnLigne" value="Mettre en ligne" class="w-30 p-3 bg-green-500 rounded-lg cursor-pointer">
+                        <input type="submit" id="miseEnLigne" name="miseEnLigne" value="Mettre en ligne" class="w-30 p-3 bg-green-500 rounded-lg cursor-pointer text-white">
                     </div>
                 </div>
                 {# Info+ #}

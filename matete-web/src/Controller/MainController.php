@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Annonce;
 use App\Entity\Lieu;
 use App\Repository\AnnonceRepository;
+use App\Repository\CategorieRepository;
 use App\Repository\LieuRepository;
 use App\Repository\ProducteurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
     #[Route('/', name: 'main_page')]
-    public function index(Request $request, AnnonceRepository $annonceRepository, LieuRepository $lieuRepository, ProducteurRepository $producteurRepository): Response
+    public function index(Request $request, AnnonceRepository $annonceRepository, LieuRepository $lieuRepository, ProducteurRepository $producteurRepository, CategorieRepository $categorieRepository): Response
     {
         $session = new Session();
         $session->start();
@@ -32,6 +33,7 @@ class MainController extends AbstractController
 
         $user = $this->getUser();
         $lieux = $lieuRepository->findAll();
+        $categories = $categorieRepository->findAll();
 
         // MAPS
         $listeLieux = [];
@@ -89,11 +91,23 @@ class MainController extends AbstractController
                     );
             }
         }
+        // Liste catégorie
+        $ListeCategorie=[];
+        foreach($categories as $uneCategorie){
+            $id = $uneCategorie->getId();
+            $libelle = $uneCategorie->getLibelle();
+            $listeCategorie[] = array(
+                'id' => $id,
+                'libelle'=> $libelle,
+            );
+        }
+
 
         if($user == null){
             return $this->render('main/index.html.twig', [
                 'listeLieux' => $listeLieux,
                 'cookies' => $cookie,
+                'ListeCategorie' => $listeCategorie,
             ]);
         }else{
             return $this->render('panel_prod/index.html.twig', [
@@ -108,9 +122,9 @@ class MainController extends AbstractController
     #[Route('/filtre', name: 'filtre')]
     public function filtre(): Response
     {
+
         $session = new Session();
         $session->start();
-
         return $this->render('main/filtre.html.twig', [
         ]);
     }

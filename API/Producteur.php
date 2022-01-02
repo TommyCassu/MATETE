@@ -73,5 +73,16 @@ class Producteur {
     public function getMail() {
         return $this->mail;
     }
+
+    public function jsonSerialize (){
+        return [
+            "id" => $this->id,
+            "nom" => $this->nom,
+            "prenom" => $this->prenom,
+            "tel" => $this->tel,
+            "mail" => $this->mail,
+        ];
+    }
+
     
 }

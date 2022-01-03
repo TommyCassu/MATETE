@@ -1,6 +1,6 @@
 <?php
 
-class Producteur {
+class Producteur implements JsonSerializable  {
     private $id;
     private $nom;
     private $prenom;

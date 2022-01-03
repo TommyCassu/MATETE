@@ -29,11 +29,11 @@ class MainController extends AbstractController
         $response->sendHeaders();
         $cookie = $request->cookies->get('visite');
 
-        dump($session->get('panier'));
+        dump($session->get('filtre'));
 
         $user = $this->getUser();
         $lieux = $lieuRepository->findAll();
-        $categories = $categorieRepository->findAll();
+        $annonceFiltre = $annonceRepository->findAll();
 
         // MAPS
         $listeLieux = [];
@@ -47,10 +47,23 @@ class MainController extends AbstractController
                 $libelle = $annonce->getLibelleProduit();
                 $id = $annonce->getId();
 
-                $annonceListe[] = array(
-                    'libelle' => $libelle,
-                    'id' => $id,
-                );
+                if ($session->get('filtre') != null) {
+                    foreach ($session->get('filtre') as $filtre) {
+                        if ($filtre == $libelle) {
+                            $annonceListe[] = array(
+                                'libelle' => $libelle,
+                                'id' => $id,
+                            );
+                        }
+                    }
+                } else {
+                    $annonceListe[] = array(
+                        'libelle' => $libelle,
+                        'id' => $id,
+                    );
+                }
+
+                
             }
             
             $listeLieux[] = array(
@@ -92,11 +105,11 @@ class MainController extends AbstractController
             }
         }
         // Liste catégorie
-        $ListeCategorie=[];
-        foreach($categories as $uneCategorie){
-            $id = $uneCategorie->getId();
-            $libelle = $uneCategorie->getLibelle();
-            $listeCategorie[] = array(
+        $ListeFiltre=[];
+        foreach($annonceFiltre as $uneAnnonce){
+            $id = $uneAnnonce->getId();
+            $libelle = $uneAnnonce->getLibelleProduit();
+            $ListeFiltre[] = array(
                 'id' => $id,
                 'libelle'=> $libelle,
             );
@@ -107,26 +120,18 @@ class MainController extends AbstractController
             return $this->render('main/index.html.twig', [
                 'listeLieux' => $listeLieux,
                 'cookies' => $cookie,
-                'ListeCategorie' => $listeCategorie,
+                'ListeFiltre' => $ListeFiltre,
+                'sessionFiltre' => $session->get('filtre'),
             ]);
         }else{
             return $this->render('panel_prod/index.html.twig', [
                 'listeLieux' => $listeLieux,
                 'cookies' => $cookie,
                 'tableauAnnonce' => $listeDesAnnonces,
-                'ListeCategorie' => $listeCategorie,
+                'ListeFiltre' => $ListeFiltre,
+                'sessionFiltre' => $session->get('filtre'),
             ]);
         }
-    }
-
-    #[Route('/filtre', name: 'filtre')]
-    public function filtre(): Response
-    {
-
-        $session = new Session();
-        $session->start();
-        return $this->render('main/filtre.html.twig', [
-        ]);
     }
 
     #[Route('/ajout/{id}', name: 'panierAjout')]
@@ -179,5 +184,19 @@ class MainController extends AbstractController
         $session->clear();
 
        return $this->redirectToRoute('main_page');
+    }
+
+    #[Route('/filtre', name: 'appliqueFiltre')]
+    public function appliqueFiltre(Request $request): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $session = new Session();
+
+        $filtre = $request->request->get('check');
+        $session->set('filtre', $filtre);
+
+        
+
+        return $this->redirectToRoute('main_page'); 
     }
 }

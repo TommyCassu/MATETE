@@ -114,7 +114,7 @@ class MainController extends AbstractController
                 'listeLieux' => $listeLieux,
                 'cookies' => $cookie,
                 'tableauAnnonce' => $listeDesAnnonces,
-
+                'ListeCategorie' => $listeCategorie,
             ]);
         }
     }

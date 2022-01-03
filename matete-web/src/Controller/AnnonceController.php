@@ -146,6 +146,7 @@ class AnnonceController extends AbstractController
             $annonce->setCategorie($request->request->get('categorie'));
         }
 
+        
         $entityManager->persist($annonce);
         $entityManager->flush();
 
@@ -167,5 +168,29 @@ class AnnonceController extends AbstractController
         }
 
         return $this->redirectToRoute('annonce_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/enLigne', name: 'mettreEnLigne', methods: ['POST'])]
+    public function mettreEnLigne(Request $request, Annonce $annonce): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $annonce->setStatus('EnLigne');
+
+        $entityManager->persist($annonce);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('main_page');
+    }
+
+    #[Route('/{id}/PasEnLigne', name: 'PasEnLigne', methods: ['POST'])]
+    public function PasEnLigne(Request $request, Annonce $annonce): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $annonce->setStatus('PasEnLigne');
+
+        $entityManager->persist($annonce);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('main_page');
     }
 }

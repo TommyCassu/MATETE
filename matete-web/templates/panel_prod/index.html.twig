@@ -165,8 +165,8 @@ box-shadow: inset 0px 0px 0px 0px #F0F0F0;
                                   <div class="relative z-50 w-3/6 h-6 top-3 ml-8"><i >Prix : {{ annonce.prix}}</i></div>
                                 </div>
                               {# Statut #}
-                                {% if annonce.status == "pasEnLigne" %}
-                                  <i class="z-40 fas fa-circle statutvert "  ></i>
+                                {% if annonce.status == "EnLigne" %}
+                                  <i class="z-40 relative fas fa-circle fa-2x ml-10 mt-4 bg-black border-2 border-black rounded-full  statutvert "  ></i>
                                 {% else %}
                                   <i class="z-40 relative fas fa-circle statutrouge fa-2x ml-10 mt-4 bg-black border-2 border-black rounded-full "></i>
                                 {% endif %}

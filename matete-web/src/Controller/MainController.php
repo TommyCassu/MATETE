@@ -17,7 +17,19 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
-    #[Route('/', name: 'main_page')]
+    #[Route('/', name: 'main_page')]    
+    /**
+     * index
+     * Affichage de la main Page,
+     * Initialisation des marker pour la carte,
+     * Initialisation des filtres
+     * @param  mixed $request
+     * @param  mixed $annonceRepository
+     * @param  mixed $lieuRepository
+     * @param  mixed $producteurRepository
+     * @param  mixed $categorieRepository
+     * @return Response
+     */
     public function index(Request $request, AnnonceRepository $annonceRepository, LieuRepository $lieuRepository, ProducteurRepository $producteurRepository, CategorieRepository $categorieRepository): Response
     {
         $session = new Session();
@@ -104,7 +116,7 @@ class MainController extends AbstractController
                     );
             }
         }
-        // Liste catégorie
+        // Liste filtre
         $ListeFiltre=[];
         foreach($annonceFiltre as $uneAnnonce){
             $id = $uneAnnonce->getId();
@@ -134,7 +146,15 @@ class MainController extends AbstractController
         }
     }
 
-    #[Route('/ajout/{id}', name: 'panierAjout')]
+    #[Route('/ajout/{id}', name: 'panierAjout')]    
+    /**
+     * ajoutPanier
+     *  Ajout des annonces au panier
+     * @param  mixed $annonceRepository
+     * @param  mixed $annonce
+     * @param  mixed $lieuRepository
+     * @return Response
+     */
     public function ajoutPanier(AnnonceRepository $annonceRepository, Annonce $annonce, LieuRepository $lieuRepository): Response
     {
         $annon = $annonce;
@@ -164,7 +184,13 @@ class MainController extends AbstractController
         return $this->redirectToRoute('main_page');
     }
 
-    #[Route('/panier', name: 'panier_show')]
+    #[Route('/panier', name: 'panier_show')]    
+    /**
+     * showPanier
+     *  Affichage du panier
+     * @param  mixed $annonceRepository
+     * @return Response
+     */
     public function showPanier(AnnonceRepository $annonceRepository): Response
     {
         $session = new Session();
@@ -175,7 +201,12 @@ class MainController extends AbstractController
        ]);
     }
 
-    #[Route('/panier/clear', name: 'clearPanier')]
+    #[Route('/panier/clear', name: 'clearPanier')]    
+    /**
+     * clearPanier
+     *  Suppression du panier
+     * @return Response
+     */
     public function clearPanier(): Response
     {
         $session = new Session();
@@ -186,7 +217,13 @@ class MainController extends AbstractController
        return $this->redirectToRoute('main_page');
     }
 
-    #[Route('/filtre', name: 'appliqueFiltre')]
+    #[Route('/filtre', name: 'appliqueFiltre')]    
+    /**
+     * appliqueFiltre
+     *  Appliquer les filtres sélectionnée
+     * @param  mixed $request
+     * @return Response
+     */
     public function appliqueFiltre(Request $request): Response
     {
         $entityManager = $this->getDoctrine()->getManager();

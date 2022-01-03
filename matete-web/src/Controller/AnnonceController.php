@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/panel/annonce')]
 class AnnonceController extends AbstractController
 {
-    #[Route('/', name: 'annonce_index', methods: ['GET'])]
+    #[Route('/', name: 'annonce_index', methods: ['GET'])]    
     public function index(AnnonceRepository $annonceRepository): Response
     {
         return $this->render('annonce/index.html.twig', [
@@ -29,7 +29,17 @@ class AnnonceController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'annonce_new', methods: ['GET','POST'])]
+    #[Route('/new', name: 'annonce_new', methods: ['GET','POST'])]    
+    /**
+     * new
+     *  Ajouter une annonce 
+     * @param  mixed $request
+     * @param  mixed $categorieRepository
+     * @param  mixed $producteurRepository
+     * @param  mixed $annonceRepository
+     * @param  mixed $lieuRepository
+     * @return Response
+     */
     public function new(Request $request, CategorieRepository $categorieRepository, ProducteurRepository $producteurRepository, AnnonceRepository $annonceRepository, LieuRepository $lieuRepository): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
@@ -82,7 +92,13 @@ class AnnonceController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'annonce_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'annonce_show', methods: ['GET'])]    
+    /**
+     * show
+     *  Afficher l'annonce selectionnée
+     * @param  mixed $annonce
+     * @return Response
+     */
     public function show(Annonce $annonce): Response
     {
         return $this->render('annonce/show.html.twig', [
@@ -90,7 +106,17 @@ class AnnonceController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'annonce_edit', methods: ['GET','POST'])]
+    #[Route('/{id}/edit', name: 'annonce_edit', methods: ['GET','POST'])]    
+    /**
+     * edit
+     * Modifier l'annonce sélectionnée
+     * @param  mixed $request
+     * @param  mixed $annonce
+     * @param  mixed $categorieRepository
+     * @param  mixed $lieuRepository
+     * @param  mixed $producteurRepository
+     * @return Response
+     */
     public function edit(Request $request, Annonce $annonce , CategorieRepository $categorieRepository , LieuRepository $lieuRepository , ProducteurRepository $producteurRepository): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
@@ -158,7 +184,14 @@ class AnnonceController extends AbstractController
 
     }
 
-    #[Route('/{id}', name: 'annonce_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'annonce_delete', methods: ['POST'])]    
+    /**
+     * delete
+     *  Supprimer une annonce
+     * @param  mixed $request
+     * @param  mixed $annonce
+     * @return Response
+     */
     public function delete(Request $request, Annonce $annonce): Response
     {
         if ($this->isCsrfTokenValid('delete'.$annonce->getId(), $request->request->get('_token'))) {
@@ -170,7 +203,14 @@ class AnnonceController extends AbstractController
         return $this->redirectToRoute('annonce_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/enLigne', name: 'mettreEnLigne', methods: ['POST'])]
+    #[Route('/{id}/enLigne', name: 'mettreEnLigne', methods: ['POST'])]    
+    /**
+     * mettreEnLigne
+     *  Mise en ligne de l'annonce
+     * @param  mixed $request
+     * @param  mixed $annonce
+     * @return Response
+     */
     public function mettreEnLigne(Request $request, Annonce $annonce): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
@@ -182,7 +222,14 @@ class AnnonceController extends AbstractController
         return $this->redirectToRoute('main_page');
     }
 
-    #[Route('/{id}/PasEnLigne', name: 'PasEnLigne', methods: ['POST'])]
+    #[Route('/{id}/PasEnLigne', name: 'PasEnLigne', methods: ['POST'])]    
+    /**
+     * PasEnLigne
+     *  Mise hors ligne de l'annonce
+     * @param  mixed $request
+     * @param  mixed $annonce
+     * @return Response
+     */
     public function PasEnLigne(Request $request, Annonce $annonce): Response
     {
         $entityManager = $this->getDoctrine()->getManager();

@@ -210,7 +210,7 @@ class MainController extends AbstractController
         $session = new Session();
         $session->start();
 
-        $session->clear();
+        $session->set('panier', null);
 
        return $this->redirectToRoute('main_page');
     }

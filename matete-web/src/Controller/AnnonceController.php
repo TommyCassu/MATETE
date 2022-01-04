@@ -194,13 +194,11 @@ class AnnonceController extends AbstractController
      */
     public function delete(Request $request, Annonce $annonce): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$annonce->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($annonce);
             $entityManager->flush();
-        }
 
-        return $this->redirectToRoute('annonce_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('main_page', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}/enLigne', name: 'mettreEnLigne', methods: ['POST'])]    

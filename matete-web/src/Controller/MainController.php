@@ -41,8 +41,6 @@ class MainController extends AbstractController
         $response->sendHeaders();
         $cookie = $request->cookies->get('visite');
 
-        dump($session->get('filtre'));
-
         $user = $this->getUser();
         $lieux = $lieuRepository->findAll();
         $annonceFiltre = $annonceRepository->findAll();

@@ -13,8 +13,8 @@ Tests:
   stage: test
   script:
     - cd matete-web
-    - php vendor/bin/phpunit
-    - php vendor/bin/simple-phpunit
+    - php bin/phpunit
+    - php bin/simple-phpunit
   allow_failure: false
 
 deploy_staging:

@@ -1,4 +1,4 @@
-before_script:
+efore_script:
   - apt-get update -qq
   - apt-get install -qq git
   # Setup SSH deploy keys
@@ -7,6 +7,10 @@ before_script:
   - ssh-add <(echo "$SSH_PRIVATE_KEY" | base64 -d)
   - mkdir -p ~/.ssh
   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  #installation phpunit
+  - wget https://phar.phpunit.de/phpunit-9.3.7.phar
+  - chmod +x phpunit-9.3.7.phar
+  - sudo mv phpunit-9.3.7.phar /usr/local/bin/phpunit
 
 Tests:
   image: php:8.0-apache
@@ -22,7 +26,7 @@ deploy_staging:
     name: staging
     url: lycee-gen-technologique.pro.dns-orange.fr
   script:
-    - ssh btssio@lycee-gen-technologique.pro.dns-orange.fr "cd /var/www/html/tommy/matete/matete/matete-web && docker-compose down && git checkout DeploiementTommy && git pull origin DeploiementTommy && docker-compose build --no-cache --pull && docker-compose up -d && exit"
+   - ssh btssio@lycee-gen-technologique.pro.dns-orange.fr "cd /var/www/html/tommy/matete/matete/matete-web && docker-compose down && git checkout DeploiementTommy && git pull origin DeploiementTommy && docker-compose build --no-cache --pull && docker-compose up -d && exit"
   only:
     - DeploiementTommy
 

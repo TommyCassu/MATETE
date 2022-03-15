@@ -13,6 +13,7 @@ Tests:
   stage: test
   script:
     - cd matete-web
+    - run vendor/bin/simple-phpunit
     - php bin/phpunit
   allow_failure: false
 

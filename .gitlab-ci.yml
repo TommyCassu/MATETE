@@ -17,7 +17,7 @@ Tests:
   stage: test
 
   script:
-    - php bin/phpunit matete-web/
+    - /usr/local/bin/phpunit matete-web/
   allow_failure: false
 
 deploy_staging:

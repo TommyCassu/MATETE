@@ -12,9 +12,7 @@ Tests:
   image: php:8.0-apache
   stage: test
   script:
-    - cd matete-web
-    - php bin/phpunit
-    - php bin/simple-phpunit
+    - php bin/phpunit matete-web/
   allow_failure: false
 
 deploy_staging:

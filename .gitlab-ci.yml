@@ -8,8 +8,8 @@ before_script:
   - mkdir -p ~/.ssh
   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
-test-job:
-  stage: Tests
+Tests:
+  stage: test
   script:
     - php bin/phpunit
   allow_failure: false

@@ -9,6 +9,7 @@ before_script:
   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
 Tests:
+  image: php:8.0-apache
   stage: test
   script:
     - php bin/phpunit

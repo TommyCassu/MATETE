@@ -17,8 +17,9 @@ Tests:
   stage: test
 
   script:
-    - /matete-web/src/Entity/Annonce.php/
+    
     - /usr/local/bin/phpunit matete-web/
+    - /matete-web/src/Entity/Annonce.php/
   allow_failure: false
 
 deploy_staging:

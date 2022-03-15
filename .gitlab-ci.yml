@@ -11,9 +11,9 @@ before_script:
 Tests:
   image: php:8.0-apache
   stage: test
-  
+
   script:
-    - phpunit matete-web/
+    - vendor/bin/phpunit matete-web/
   allow_failure: false
 
 deploy_staging:

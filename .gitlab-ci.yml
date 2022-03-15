@@ -7,7 +7,13 @@ before_script:
   - ssh-add <(echo "$SSH_PRIVATE_KEY" | base64 -d)
   - mkdir -p ~/.ssh
   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-   
+
+test-job:
+  stage: Tests
+  script:
+    - php bin/phpunit
+  allow_failure: false
+
 deploy_staging:
   type: deploy
   environment:
@@ -18,8 +24,3 @@ deploy_staging:
   only:
     - DeploiementTommy
 
-Tests:
-  stage: Tests
-  script:
-    - php bin/phpunit
-  allow_failure: false

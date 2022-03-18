@@ -1,5 +1,4 @@
 before_script:
-- cd matete-web 
   - apt-get update -qq
   - apt-get install -qq git wget
   # Setup SSH deploy keys

@@ -7,10 +7,7 @@ before_script:
   - ssh-add <(echo "$SSH_PRIVATE_KEY" | base64 -d)
   - mkdir -p ~/.ssh
   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-  #installation phpunit
-  - wget https://phar.phpunit.de/phpunit-9.3.7.phar
-  - chmod +x phpunit-9.3.7.phar
-  - mv phpunit-9.3.7.phar /usr/local/bin/phpunit
+  
 
 Tests:
   image: php:8.0-apache
@@ -28,12 +25,15 @@ Tests:
     - apt-get update && apt-get install -y git libzip-dev npm nodejs
     - curl -sSk https://getcomposer.org/installer | php -- --disable-tls && mv composer.phar /usr/local/bin/composer
     - docker-php-ext-install mysqli pdo pdo_mysql zip
+    #installation phpunit
+    - wget https://phar.phpunit.de/phpunit-9.3.7.phar
+    - chmod +x phpunit-9.3.7.phar
+    - mv phpunit-9.3.7.phar /usr/local/bin/phpunit
     - composer install
     - npm install
   script:
     
     - /usr/local/bin/phpunit matete-web/
-    - /matete-web/src/Entity/Annonce.php/
   allow_failure: false
 
 deploy_staging:

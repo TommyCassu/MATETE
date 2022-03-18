@@ -15,24 +15,12 @@ before_script:
 Tests:
   image: php:8.0-apache
   stage: test
-  services:
-    - name: mysql:5.7
-      alias: mysql
-  variables:
-    MYSQL_ROOT_PASSWORD: pass_test
-    MYSQL_DATABASE: matetetest
-    MYSQL_USER: matetetest
-    MYSQL_PASSWORD: matetetest
-    DATABASE_URL: 'mysql://matetetest:matetetest@mysql:3306/matetetest'
-  before_script:
-    - apt-get update && apt-get install -y git libzip-dev npm nodejs
-    - curl -sSk https://getcomposer.org/installer | php -- --disable-tls && mv composer.phar /usr/local/bin/composer
-    - docker-php-ext-install mysqli pdo pdo_mysql zip
-    - composer install
-    - npm install
+
   script:
-    - php vendor/bin/phpunit
-  allow_failure: true
+    
+    - /usr/local/bin/phpunit matete-web/
+    - /matete-web/src/Entity/Annonce.php/
+  allow_failure: false
 
 deploy_staging:
   type: deploy
@@ -43,4 +31,3 @@ deploy_staging:
    - ssh btssio@lycee-gen-technologique.pro.dns-orange.fr "cd /var/www/html/tommy/matete/matete/matete-web && docker-compose down && git checkout DeploiementTommy && git pull origin DeploiementTommy && docker-compose build --no-cache --pull && docker-compose up -d && exit"
   only:
     - DeploiementTommy
-

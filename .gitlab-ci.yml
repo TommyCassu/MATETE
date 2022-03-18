@@ -1,5 +1,5 @@
 before_script:
-  - cd matete-web 
+- cd matete-web 
   - apt-get update -qq
   - apt-get install -qq git wget
   # Setup SSH deploy keys
@@ -24,7 +24,7 @@ Tests:
     DATABASE_URL: 'mysql://matetetest:matetetest@mysql:3306/matetetest'
   before_script:
     - cd matete-web 
-    - apt-get update && apt-get install -y git libzip-dev npm nodejs
+    - apt-get update && apt-get install -y git libzip-dev npm nodejs wget
     - curl -sSk https://getcomposer.org/installer | php -- --disable-tls && mv composer.phar /usr/local/bin/composer
     - docker-php-ext-install mysqli pdo pdo_mysql zip
     - php bin/console doctrine:database:drop --force
@@ -33,6 +33,7 @@ Tests:
     - php bin/console doctrine:fixtures:load --no-interaction
     - composer install
     - npm install
+
   script:
     
     - php bin/phpunit

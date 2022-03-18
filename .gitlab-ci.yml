@@ -22,7 +22,7 @@ Tests:
     MYSQL_PASSWORD: matetetest
     DATABASE_URL: 'mysql://matetetest:matetetest@mysql:3306/matetetest'
   before_script:
-    - apt-get update && apt-get install -y git libzip-dev npm nodejs
+    - apt-get update && apt-get install -y git libzip-dev npm nodejs wget
     - curl -sSk https://getcomposer.org/installer | php -- --disable-tls && mv composer.phar /usr/local/bin/composer
     - docker-php-ext-install mysqli pdo pdo_mysql zip
     #installation phpunit

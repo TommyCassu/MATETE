@@ -33,9 +33,7 @@ Tests:
     - php bin/console doctrine:fixtures:load --no-interaction
     - composer install
     - npm install
-
   script:
-    
     - php bin/phpunit
   allow_failure: false
 

@@ -31,7 +31,7 @@ Tests:
     - composer install
     - npm install
   script:
-    - /user/local/bin/phpunit matete-web/
+    - php bin/phpunit
   allow_failure: true
 
 deploy_staging:

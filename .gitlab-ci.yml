@@ -5,6 +5,7 @@ cache:
     - vendor/
 stages:
   - SecurityChecker
+  - Tests
 
 before_script:
   - apt-get update -qq

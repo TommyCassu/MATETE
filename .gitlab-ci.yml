@@ -6,6 +6,7 @@ cache:
 stages:
   - SecurityChecker
   - test
+  - deploy
 
 before_script:
   - apt-get update -qq

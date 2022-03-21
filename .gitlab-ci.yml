@@ -25,31 +25,6 @@ security-checker:
     - local-php-security-checker --path=./composer.lock
   allow_failure: false
 
-phpcs:
-  stage: CodingStandards
-  script:
-    - phpcs -v --standard=PSR12 --ignore=./src/Kernel.php ./src
-  allow_failure: false
-
-phpstan:
-  stage: CodingStandards
-  script:
-    - phpstan analyse ./src
-  allow_failure: false
-
-twig-lint:
-  stage: CodingStandards
-  script:
-    - twig-lint lint ./templates
-  allow_failure: false
- 
-deploy_staging:
-  type: deploy
-  stage: deploy_staging
-  environment:
-    name: deploy_staging
-    url: lycee-gen-technologique.pro.dns-orange.fr
-
 Tests:
   image: php:8.0-apache
   stage: test

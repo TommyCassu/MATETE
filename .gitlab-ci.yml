@@ -5,7 +5,7 @@ cache:
     - vendor/
 stages:
   - SecurityChecker
-  - Tests
+  - test
 
 before_script:
   - apt-get update -qq
@@ -23,7 +23,7 @@ SecurityChecker:
     - local-php-security-checker --path=./composer.lock
   allow_failure: false
 
-Tests:
+test:
   image: php:8.0-apache
   stage: test
   services:

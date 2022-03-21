@@ -4,11 +4,11 @@ cache:
   paths:
     - vendor/
 stages:
+  - test
+  - prepare
   - SecurityChecker
-  - CodingStandards
-  - deploy_staging
-
-
+  - publish
+  
 before_script:
   - apt-get update -qq
   - apt-get install -qq git wget
@@ -18,8 +18,23 @@ before_script:
   - ssh-add <(echo "$SSH_PRIVATE_KEY" | base64 -d)
   - mkdir -p ~/.ssh
   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+compile-and-test:
+  stage: test
+  # ...
+
+prepare-artifacts:
+  stage: prepare
+  # ...
+
+publish-artifacts:
+  stage: publish
+  dependencies:
+    - prepare-artifacts   
+
+
+
   
-security-checker:
+SecurityChecker:
   stage: SecurityChecker
   script:
     - local-php-security-checker --path=./composer.lock

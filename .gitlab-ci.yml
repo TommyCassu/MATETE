@@ -53,7 +53,7 @@ Tests:
   allow_failure: false
 
 deploy_staging:
-  type: deploy
+  stage: deploy
   environment:
     name: staging
     url: lycee-gen-technologique.pro.dns-orange.fr

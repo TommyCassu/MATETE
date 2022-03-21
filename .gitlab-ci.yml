@@ -1,3 +1,14 @@
+#ajout du SAST
+image: jakzal/phpqa:latest
+cache:
+  paths:
+  - vendor/
+stages:
+  - SecurityChecker
+  - CodingStandards
+  - deploy_staging
+
+
 before_script:
   - apt-get update -qq
   - apt-get install -qq git wget

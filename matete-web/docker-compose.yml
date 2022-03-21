@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  db:
+    build:
+      context: ./docker/database
+    container_name: tommymatete_db
+    environment:
+      MYSQL_ROOT_PASSWORD: AccessPlusC0mplique
+      MYSQL_DATABASE: mateteTommy
+      MYSQL_USER: user
+      MYSQL_PASSWORD: AccessPlusC0mplique
+    restart: always
+    ports:
+      - "3335:3335"
+      # volumes:
+      # - ./docker/database/matete.sql:/docker-entrypoint-initdb.d/init.sql
+      # - ./database/data:/var/lib/mysql 
+    networks:
+      - symfony
+      
+  web:
+    build:
+      context: ./docker/apache
+    container_name: tommymatete_apache
+    depends_on:
+      - db
+    volumes:
+      - .:/var/www/html/matetesymfony
+    ports:
+      - 8033:8033
+    networks:
+      - symfony
+    
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    container_name: matete_phpmyadmintommy
+    links:
+      - db
+    restart: always
+    ports:
+      - 8034:8034
+    environment:
+      PMA_HOST: tommymatete_db
+      MYSQL_ROOT_PASSWORD: AccessPlusC0mplique
+    networks:
+      - symfony
+
+networks:
+  symfony:

@@ -5,9 +5,6 @@ cache:
   - vendor/
 stages:
   - SecurityChecker
-  - CodingStandards
-  - deploy_staging
-
 
 before_script:
   - apt-get update -qq

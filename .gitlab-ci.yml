@@ -2,7 +2,7 @@
 image: jakzal/phpqa:latest
 cache:
   paths:
-  - vendor/
+    - vendor/
 stages:
   - SecurityChecker
   - CodingStandards

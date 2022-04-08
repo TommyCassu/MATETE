@@ -1,0 +1,46 @@
+SEMAINE 2:
+FAIT:
+permet d'ajouter un admin facilement
+empécher de modif création les dates passées 
+interdir changement inférieur a 1 mois ( passer par l'admin ) 
+afficher date : déja effectué / réservé
+limitation d'affichage sur l'année scolaire courante ( calendrier )^
+permettre a l'admin de poser des gardes de tlm
+envoie mail 
+
+NON FAIT:
+effacer les gardes après l'année
+ajouter un systeme de permutation qui envoie un mail pour confirmer 
+systeme vacances a refaire
+
+SEMAINE 3:
+Ajouter le fonctionnement du calendrier (tuto)
+Rajouter un compteur de garde par famille a coté du drag and drop
+coté panel gauche calendrier trier par famille avec compteur de garde
+Finaliser laspect front indispensable 
+Autoriser création garde ancienne date admin 
+
+ADMIN:
+mail garde juste semaine a venir
+rendre dynamique la restriction de la limite du calendrier
+rendre le mail automatique ( passer par tache planifier depuis le serveur )
+
+FRONT
+couleur lucioles blanc a pois jaune
+coté production access ssh
+
+
+mise en prod symfony 
+
+
+
+
+
+
+Nom Famille NBGarde :
+user
+user
+
+Nom Famille NBGarde :
+user
+user
